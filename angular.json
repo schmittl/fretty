@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "fretty": "apps/fretty",
+    "fretty-e2e": "apps/fretty-e2e"
+  }
+}

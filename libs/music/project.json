@@ -1,0 +1,22 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/music/src",
+  "prefix": "fretty",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/music"],
+      "options": {
+        "jestConfig": "libs/music/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/music/**/*.ts", "libs/music/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

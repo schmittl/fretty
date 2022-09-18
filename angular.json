@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "fretty": "apps/fretty",
-    "fretty-e2e": "apps/fretty-e2e"
+    "fretty-e2e": "apps/fretty-e2e",
+    "music": "libs/music"
   }
 }

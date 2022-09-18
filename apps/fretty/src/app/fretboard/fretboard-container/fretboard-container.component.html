@@ -1,8 +1,5 @@
-<div *ngFor="let string of fretboard.notes" class="flex flex-row gap-1">
-  <div
-    *ngFor="let note of string"
-    class="font-sans font-semibold text-lg bg-sky-700 text-sky-100 p-2 m-1 rounded-full w-20 h-20 flex items-center justify-center"
-  >
-    {{ note }}
-  </div>
+<div *ngFor="let string of fretboard.notes" class="flex flex-row justify-center gap-1">
+  <ng-container *ngFor="let note of string">
+    <fretty-fretboard-note [note]="note" [show]="showNote(note)"></fretty-fretboard-note>
+  </ng-container>
 </div>

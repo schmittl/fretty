@@ -16,6 +16,6 @@ describe('AppComponent', () => {
   });
 
   it('should render title', () => {
-    expect(fixture.nativeElement.querySelector('h1')?.textContent).toContain('Welcome to fretty');
+    expect(fixture.nativeElement.querySelector('h1')?.textContent).toContain('fretty');
   });
 });

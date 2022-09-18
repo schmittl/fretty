@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Fretboard } from '@fretty/music';
+import { Fretboard, keys, scales } from '@fretty/music';
 import { Note, ScaleType } from '@tonaljs/tonal';
 
 @Component({
@@ -8,15 +8,23 @@ import { Note, ScaleType } from '@tonaljs/tonal';
   styleUrls: ['./fretboard-container.component.scss'],
 })
 export class FretboardContainerComponent {
+  scales = scales;
+  keys = keys;
+
+  selectedScale = ScaleType.get('aeolian');
+  selectedKey = 'C';
+
   fretboard = new Fretboard({
     frets: 12,
   });
 
-  private scale = ScaleType.get('major');
-  private key = 'E';
-
   showNote(note: string): boolean {
-    const scale = this.scale.intervals.map(Note.transposeFrom(this.key));
-    return scale.includes(note);
+    if (this.selectedScale.empty) {
+      return true;
+    }
+    const scaleNotes = this.selectedScale.intervals
+      .map(Note.transposeFrom(this.selectedKey))
+      .map((note) => Note.simplify(note));
+    return scaleNotes.includes(note) || scaleNotes.includes(Note.enharmonic(note));
   }
 }

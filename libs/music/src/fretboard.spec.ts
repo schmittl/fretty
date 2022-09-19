@@ -4,7 +4,7 @@ describe('Fretboard', () => {
   describe('Notes', () => {
     it('Returns default fretboard notes', () => {
       const fretboard = new Fretboard();
-      expect(fretboard.notes).toEqual([
+      expect(notes(fretboard)).toEqual([
         ['E', 'F', 'F#', 'G', 'G#'],
         ['B', 'C', 'C#', 'D', 'D#'],
         ['G', 'G#', 'A', 'A#', 'B'],
@@ -18,7 +18,7 @@ describe('Fretboard', () => {
       const fretboard = new Fretboard({
         tuning: [],
       });
-      expect(fretboard.notes).toEqual([]);
+      expect(notes(fretboard)).toEqual([]);
     });
 
     it('Returns fretboard notes for zero frets', () => {
@@ -26,21 +26,21 @@ describe('Fretboard', () => {
         tuning: ['E'],
         frets: 0,
       });
-      expect(fretboard.notes).toEqual([['E']]);
+      expect(notes(fretboard)).toEqual([['E']]);
     });
 
     it('Returns fretboard notes for one string', () => {
       const fretboard = new Fretboard({
         tuning: ['E'],
       });
-      expect(fretboard.notes).toEqual([['E', 'F', 'F#', 'G', 'G#']]);
+      expect(notes(fretboard)).toEqual([['E', 'F', 'F#', 'G', 'G#']]);
     });
 
     it('Returns fretboard notes for two strings', () => {
       const fretboard = new Fretboard({
         tuning: ['E', 'A'],
       });
-      expect(fretboard.notes).toEqual([
+      expect(notes(fretboard)).toEqual([
         ['A', 'A#', 'B', 'C', 'C#'],
         ['E', 'F', 'F#', 'G', 'G#'],
       ]);
@@ -51,7 +51,7 @@ describe('Fretboard', () => {
         tuning: ['E', 'A'],
         stringOrder: 'low-first',
       });
-      expect(fretboard.notes).toEqual([
+      expect(notes(fretboard)).toEqual([
         ['E', 'F', 'F#', 'G', 'G#'],
         ['A', 'A#', 'B', 'C', 'C#'],
       ]);
@@ -62,7 +62,7 @@ describe('Fretboard', () => {
         tuning: ['E'],
         accidentals: 'flats',
       });
-      expect(fretboard.notes).toEqual([['E', 'F', 'Gb', 'G', 'Ab']]);
+      expect(notes(fretboard)).toEqual([['E', 'F', 'Gb', 'G', 'Ab']]);
     });
   });
 
@@ -73,3 +73,7 @@ describe('Fretboard', () => {
     });
   });
 });
+
+const notes = (fretboard: Fretboard): string[][] => {
+  return fretboard.notes.map((string) => string.map((note) => note.pc));
+};

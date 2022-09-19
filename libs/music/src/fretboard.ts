@@ -1,4 +1,5 @@
 import { Note } from '@tonaljs/tonal';
+import { Note as INote } from '@tonaljs/core';
 
 export interface FretboardConfig {
   readonly tuning: string[];
@@ -14,7 +15,7 @@ export const defaultConfig: FretboardConfig = {
   stringOrder: 'high-first',
 };
 
-export type FretboardNotes = readonly (readonly string[])[];
+export type FretboardNotes = readonly (readonly INote[])[];
 
 export class Fretboard {
   private readonly _config: FretboardConfig;
@@ -33,8 +34,8 @@ export class Fretboard {
     return this._notes;
   }
 
-  private notesOnFretboard(): string[][] {
-    const notesOnFretboard: string[][] = [];
+  private notesOnFretboard(): INote[][] {
+    const notesOnFretboard: INote[][] = [];
     const notesOfTuning =
       this.config.stringOrder === 'high-first' ? this.config.tuning.slice().reverse() : this.config.tuning;
 
@@ -45,7 +46,7 @@ export class Fretboard {
     return notesOnFretboard;
   }
 
-  private notesOnString(startNote: string): string[] {
+  private notesOnString(startNote: string): INote[] {
     const notesOnString = [startNote];
     const frets = this.config.frets;
 
@@ -55,7 +56,7 @@ export class Fretboard {
       currentNote = nextNote;
     }
 
-    return notesOnString;
+    return notesOnString.map((note) => Note.get(note) as INote);
   }
 
   private nextNoteOnString(currentNote: string): string {

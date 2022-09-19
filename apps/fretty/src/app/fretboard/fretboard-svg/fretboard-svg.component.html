@@ -4,9 +4,9 @@
       *ngFor="let note of string; let column = index"
       [attr.transform]="transformX(column)"
       class="fill-sky-700 hover:fill-teal-600 cursor-pointer"
-      [class.invisible]="!showNote(note)"
+      [class.invisible]="!showNote(note.pc)"
       fretty-fretboard-note
-      [note]="note"
+      [note]="note.pc"
       [size]="noteSize"
     ></g>
   </g>

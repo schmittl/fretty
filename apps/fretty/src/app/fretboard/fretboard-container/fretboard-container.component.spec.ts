@@ -1,7 +1,6 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { FretboardNoteComponent } from '../fretboard-note/fretboard-note.component';
-
 import { FretboardContainerComponent } from './fretboard-container.component';
 
 describe('FretboardContainerComponent', () => {
@@ -10,8 +9,9 @@ describe('FretboardContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FretboardContainerComponent, FretboardNoteComponent],
+      declarations: [FretboardContainerComponent],
       imports: [FormsModule],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FretboardContainerComponent);

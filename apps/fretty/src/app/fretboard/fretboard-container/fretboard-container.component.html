@@ -13,15 +13,4 @@
   </div>
 </div>
 
-<svg width="100%" height="60vh" viewBox="0 0 1080 540" xmlns="http://www.w3.org/2000/svg" class="mt-10">
-  <g *ngFor="let string of fretboard.notes; let i = index" attr.transform="translate(0 {{ i * 90 }})">
-    <g
-      *ngFor="let note of string; let j = index"
-      attr.transform="translate({{ j * 90 }})"
-      class="fill-sky-700 hover:fill-teal-600 cursor-pointer"
-      [class.invisible]="!showNote(note)"
-      fretty-fretboard-note
-      [note]="note"
-    ></g>
-  </g>
-</svg>
+<fretty-fretboard-svg [fretboard]="fretboard" [showNote]="showNote"></fretty-fretboard-svg>

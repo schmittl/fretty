@@ -1,0 +1,13 @@
+<svg width="100%" height="60vh" [attr.viewBox]="viewBox()" class="mt-10" xmlns="http://www.w3.org/2000/svg">
+  <g *ngFor="let string of fretboard.notes; let row = index" [attr.transform]="transformY(row)">
+    <g
+      *ngFor="let note of string; let column = index"
+      [attr.transform]="transformX(column)"
+      class="fill-sky-700 hover:fill-teal-600 cursor-pointer"
+      [class.invisible]="!showNote(note)"
+      fretty-fretboard-note
+      [note]="note"
+      [size]="noteSize"
+    ></g>
+  </g>
+</svg>

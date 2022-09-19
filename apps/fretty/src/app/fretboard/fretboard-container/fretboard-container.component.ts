@@ -17,7 +17,7 @@ export class FretboardContainerComponent {
     frets: 12,
   });
 
-  showNote(note: string): boolean {
+  showNote = (note: string): boolean => {
     return scaleIncludes(this.selectedScale, this.selectedKey, note);
-  }
+  };
 }

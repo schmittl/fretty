@@ -9,4 +9,6 @@ import { Component, Input } from '@angular/core';
 export class FretboardNoteComponent {
   @Input()
   note = '';
+  @Input()
+  size = 40;
 }

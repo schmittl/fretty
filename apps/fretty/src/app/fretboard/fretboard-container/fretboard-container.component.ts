@@ -13,11 +13,21 @@ export class FretboardContainerComponent {
   selectedScale = defaultScale;
   selectedKey = defaultKey;
 
-  fretboard = new Fretboard({
-    frets: 12,
-  });
+  fretboard = this.createFretboard();
 
   showNote = (note: string): boolean => {
     return scaleIncludes(this.selectedScale, this.selectedKey, note);
   };
+
+  updateFretboard(): void {
+    this.fretboard = this.createFretboard();
+  }
+
+  private createFretboard(): Fretboard {
+    return new Fretboard({
+      frets: 5,
+      scale: this.selectedScale.name,
+      key: this.selectedKey,
+    });
+  }
 }

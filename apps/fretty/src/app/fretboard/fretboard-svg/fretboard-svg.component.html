@@ -3,8 +3,9 @@
     <g
       *ngFor="let note of string; let column = index"
       [attr.transform]="transformX(column)"
-      class="fill-sky-700 hover:fill-teal-600 cursor-pointer"
+      class="fill-sky-700 hover:fill-sky-500 cursor-pointer"
       [class.invisible]="!showNote(note.pc)"
+      [ngClass]="{ 'fill-green-700 hover:fill-green-500': fretboard.isTonic(note) }"
       fretty-fretboard-note
       [note]="note.pc"
       [size]="noteSize"

@@ -1,11 +1,15 @@
-import { Note } from '@tonaljs/tonal';
+import { Note, Scale } from '@tonaljs/tonal';
 import { Note as INote } from '@tonaljs/core';
+import { Scale as IScale } from '@tonaljs/scale';
+import { defaultScale, defaultKey } from './scale';
 
 export interface FretboardConfig {
   readonly tuning: string[];
   readonly frets: number;
   readonly accidentals: 'flats' | 'sharps';
   readonly stringOrder: 'high-first' | 'low-first';
+  readonly scale: string;
+  readonly key: string;
 }
 
 export const defaultConfig: FretboardConfig = {
@@ -13,16 +17,21 @@ export const defaultConfig: FretboardConfig = {
   frets: 5,
   accidentals: 'sharps',
   stringOrder: 'high-first',
+  scale: defaultScale.name,
+  key: defaultKey,
 };
 
 export type FretboardNotes = readonly (readonly INote[])[];
+export type FretboardScale = Readonly<IScale>;
 
 export class Fretboard {
   private readonly _config: FretboardConfig;
   private readonly _notes: FretboardNotes;
+  private readonly _scale: IScale;
 
   constructor(fretboardConfig: Partial<FretboardConfig> = {}) {
     this._config = Object.freeze({ ...defaultConfig, ...fretboardConfig });
+    this._scale = Object.freeze(Scale.get([this._config.key, this._config.scale]));
     this._notes = Object.freeze(this.notesOnFretboard());
   }
 
@@ -32,6 +41,10 @@ export class Fretboard {
 
   get notes(): FretboardNotes {
     return this._notes;
+  }
+
+  isTonic(note: INote): boolean {
+    return this._scale.tonic === note.pc;
   }
 
   private notesOnFretboard(): INote[][] {

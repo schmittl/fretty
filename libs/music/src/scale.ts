@@ -1,5 +1,6 @@
 import { Note, ScaleType } from '@tonaljs/tonal';
 import { ScaleType as Scale } from '@tonaljs/scale-type';
+import { Scale as TonalScale } from '@tonaljs/scale';
 
 export const defaultScale = ScaleType.get('chromatic');
 export const defaultKey = 'C';
@@ -11,11 +12,25 @@ const transposeScale = (scale: Scale, key: string): string[] =>
 
 export const defaultKeys = transposeScale(defaultScale, defaultKey).map((note) => Note.enharmonic(note));
 
-export const scaleIncludes = (scale: string, key: string, note: string): boolean => {
-  const scaleType = ScaleType.get(scale);
-  if (!scaleType || scaleType.empty || !key || !note) {
+export const scaleIncludes = (scale: TonalScale, note: string): boolean => {
+  if (!scale || scale.empty || !scale.tonic || !note) {
     return false;
   }
-  const scaleNotes = transposeScale(scaleType, key);
-  return scaleNotes.includes(note) || scaleNotes.includes(Note.enharmonic(note));
+  const scaleNotes = transposeScale(scale, scale.tonic);
+  return enharmonicIncludes(scaleNotes, note);
+};
+
+export const scaleInterval = (scale: TonalScale, note: string): string => {
+  return scale.intervals[enharmonicIndexOf(scale.notes, note)];
+};
+
+const enharmonicIncludes = (notes: string[], note: string): boolean =>
+  notes.includes(note) || notes.includes(Note.enharmonic(note));
+
+const enharmonicIndexOf = (notes: string[], note: string): number => {
+  const index = notes.indexOf(note);
+  if (index == -1) {
+    return notes.indexOf(Note.enharmonic(note));
+  }
+  return index;
 };

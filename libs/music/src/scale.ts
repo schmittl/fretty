@@ -11,10 +11,11 @@ const transposeScale = (scale: Scale, key: string): string[] =>
 
 export const defaultKeys = transposeScale(defaultScale, defaultKey).map((note) => Note.enharmonic(note));
 
-export const scaleIncludes = (scale: Scale, key: string, note: string): boolean => {
-  if (!scale || scale.empty || !key || !note) {
+export const scaleIncludes = (scale: string, key: string, note: string): boolean => {
+  const scaleType = ScaleType.get(scale);
+  if (!scaleType || scaleType.empty || !key || !note) {
     return false;
   }
-  const scaleNotes = transposeScale(scale, key);
+  const scaleNotes = transposeScale(scaleType, key);
   return scaleNotes.includes(note) || scaleNotes.includes(Note.enharmonic(note));
 };

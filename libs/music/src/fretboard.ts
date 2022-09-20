@@ -1,7 +1,7 @@
 import { Note, Scale } from '@tonaljs/tonal';
 import { Note as TonalNote } from '@tonaljs/core';
 import { Scale as TonalScale } from '@tonaljs/scale';
-import { defaultScale, defaultKey } from './scale';
+import { defaultScale, defaultKey, scaleIncludes } from './scale';
 
 export interface FretboardConfig {
   readonly tuning: string[];
@@ -23,6 +23,8 @@ export const defaultConfig: FretboardConfig = {
 
 export interface FretboardNote {
   readonly pitchclass: string;
+  readonly isTonic: boolean;
+  readonly inScale: boolean;
 }
 
 export type FretboardNotes = readonly (readonly FretboardNote[])[];
@@ -47,10 +49,6 @@ export class Fretboard {
     return this._notes;
   }
 
-  isTonic(note: FretboardNote): boolean {
-    return this._scale.tonic === note.pitchclass;
-  }
-
   private notesOnFretboard(): FretboardNote[][] {
     const notesOnFretboard: FretboardNote[][] = [];
     const notesOfTuning =
@@ -73,20 +71,30 @@ export class Fretboard {
       currentNote = nextNote;
     }
 
-    return notesOnString.map(toFretboardNote);
+    return notesOnString.map((note) => this.toFretboardNote(note));
   }
 
   private nextNoteOnString(currentNote: string): string {
     const nextNote = Note.simplify(transposeBySemitone(currentNote));
     return this.config.accidentals === 'flats' ? nextNote : Note.enharmonic(nextNote);
   }
+
+  private toFretboardNote(note: string): FretboardNote {
+    const tonalNote = Note.get(note) as TonalNote;
+    return {
+      pitchclass: tonalNote.pc,
+      isTonic: this.isTonic(note),
+      inScale: this.inScale(note),
+    };
+  }
+
+  private isTonic(note: string): boolean {
+    return this._scale.tonic === note;
+  }
+
+  private inScale(note: string): boolean {
+    return scaleIncludes(this.config.scale, this.config.key, note);
+  }
 }
 
 const transposeBySemitone = Note.transposeBy('2m');
-
-const toFretboardNote = (note: string): FretboardNote => {
-  const tonalNote = Note.get(note) as TonalNote;
-  return {
-    pitchclass: tonalNote.pc,
-  };
-};

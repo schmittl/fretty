@@ -16,7 +16,6 @@ describe('FretboardSvgComponent', () => {
     fixture = TestBed.createComponent(FretboardSvgComponent);
     component = fixture.componentInstance;
     component.fretboard = new Fretboard();
-    component.showNote = () => true;
     fixture.detectChanges();
   });
 

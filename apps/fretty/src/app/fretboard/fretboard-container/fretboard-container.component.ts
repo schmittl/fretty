@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { defaultKey, defaultKeys, defaultScale, defaultScales, Fretboard, scaleIncludes } from '@fretty/music';
+import { defaultKey, defaultKeys, defaultScale, defaultScales, Fretboard } from '@fretty/music';
 
 @Component({
   selector: 'fretty-fretboard-container',
@@ -14,10 +14,6 @@ export class FretboardContainerComponent {
   selectedKey = defaultKey;
 
   fretboard = this.createFretboard();
-
-  showNote = (note: string): boolean => {
-    return scaleIncludes(this.selectedScale, this.selectedKey, note);
-  };
 
   updateFretboard(): void {
     this.fretboard = this.createFretboard();

@@ -9,8 +9,6 @@ import { Fretboard } from '@fretty/music';
 export class FretboardSvgComponent {
   @Input()
   fretboard!: Fretboard;
-  @Input()
-  showNote!: (note: string) => boolean;
 
   noteSize = 40;
 

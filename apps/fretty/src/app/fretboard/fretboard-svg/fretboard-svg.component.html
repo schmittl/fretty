@@ -4,10 +4,10 @@
       *ngFor="let note of string; let column = index"
       [attr.transform]="transformX(column)"
       class="fill-sky-700 hover:fill-sky-500 cursor-pointer"
-      [class.invisible]="!showNote(note.pc)"
+      [class.invisible]="!showNote(note.pitchclass)"
       [ngClass]="{ 'fill-green-700 hover:fill-green-500': fretboard.isTonic(note) }"
       fretty-fretboard-note
-      [note]="note.pc"
+      [note]="note.pitchclass"
       [size]="noteSize"
     ></g>
   </g>

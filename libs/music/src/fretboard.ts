@@ -22,7 +22,7 @@ export const defaultConfig: FretboardConfig = {
 };
 
 export interface FretboardNote {
-  readonly pc: string;
+  readonly pitchclass: string;
 }
 
 export type FretboardNotes = readonly (readonly FretboardNote[])[];
@@ -48,7 +48,7 @@ export class Fretboard {
   }
 
   isTonic(note: FretboardNote): boolean {
-    return this._scale.tonic === note.pc;
+    return this._scale.tonic === note.pitchclass;
   }
 
   private notesOnFretboard(): FretboardNote[][] {
@@ -87,6 +87,6 @@ const transposeBySemitone = Note.transposeBy('2m');
 const toFretboardNote = (note: string): FretboardNote => {
   const tonalNote = Note.get(note) as TonalNote;
   return {
-    pc: tonalNote.pc,
+    pitchclass: tonalNote.pc,
   };
 };

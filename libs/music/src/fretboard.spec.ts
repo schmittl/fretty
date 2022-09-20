@@ -75,5 +75,5 @@ describe('Fretboard', () => {
 });
 
 const notes = (fretboard: Fretboard): string[][] => {
-  return fretboard.notes.map((string) => string.map((note) => note.pc));
+  return fretboard.notes.map((string) => string.map((note) => note.pitchclass));
 };

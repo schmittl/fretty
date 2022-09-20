@@ -1,6 +1,6 @@
 import { Note, Scale } from '@tonaljs/tonal';
-import { Note as INote } from '@tonaljs/core';
-import { Scale as IScale } from '@tonaljs/scale';
+import { Note as TonalNote } from '@tonaljs/core';
+import { Scale as TonalScale } from '@tonaljs/scale';
 import { defaultScale, defaultKey } from './scale';
 
 export interface FretboardConfig {
@@ -21,13 +21,17 @@ export const defaultConfig: FretboardConfig = {
   key: defaultKey,
 };
 
-export type FretboardNotes = readonly (readonly INote[])[];
-export type FretboardScale = Readonly<IScale>;
+export interface FretboardNote {
+  readonly pc: string;
+}
+
+export type FretboardNotes = readonly (readonly FretboardNote[])[];
+export type FretboardScale = Readonly<TonalScale>;
 
 export class Fretboard {
   private readonly _config: FretboardConfig;
   private readonly _notes: FretboardNotes;
-  private readonly _scale: IScale;
+  private readonly _scale: TonalScale;
 
   constructor(fretboardConfig: Partial<FretboardConfig> = {}) {
     this._config = Object.freeze({ ...defaultConfig, ...fretboardConfig });
@@ -43,12 +47,12 @@ export class Fretboard {
     return this._notes;
   }
 
-  isTonic(note: INote): boolean {
+  isTonic(note: FretboardNote): boolean {
     return this._scale.tonic === note.pc;
   }
 
-  private notesOnFretboard(): INote[][] {
-    const notesOnFretboard: INote[][] = [];
+  private notesOnFretboard(): FretboardNote[][] {
+    const notesOnFretboard: FretboardNote[][] = [];
     const notesOfTuning =
       this.config.stringOrder === 'high-first' ? this.config.tuning.slice().reverse() : this.config.tuning;
 
@@ -59,7 +63,7 @@ export class Fretboard {
     return notesOnFretboard;
   }
 
-  private notesOnString(startNote: string): INote[] {
+  private notesOnString(startNote: string): FretboardNote[] {
     const notesOnString = [startNote];
     const frets = this.config.frets;
 
@@ -69,7 +73,7 @@ export class Fretboard {
       currentNote = nextNote;
     }
 
-    return notesOnString.map((note) => Note.get(note) as INote);
+    return notesOnString.map(toFretboardNote);
   }
 
   private nextNoteOnString(currentNote: string): string {
@@ -79,3 +83,10 @@ export class Fretboard {
 }
 
 const transposeBySemitone = Note.transposeBy('2m');
+
+const toFretboardNote = (note: string): FretboardNote => {
+  const tonalNote = Note.get(note) as TonalNote;
+  return {
+    pc: tonalNote.pc,
+  };
+};

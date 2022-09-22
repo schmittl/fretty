@@ -12,7 +12,7 @@ export class FretboardSvgComponent {
 
   noteSize = 40;
 
-  private notePadding = this.noteSize / 8;
+  private notePadding = this.noteSize / 4;
   private noteSpace = (this.noteSize + this.notePadding) * 2;
 
   viewBox(): string {

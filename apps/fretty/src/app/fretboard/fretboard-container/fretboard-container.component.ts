@@ -21,7 +21,7 @@ export class FretboardContainerComponent {
 
   private createFretboard(): Fretboard {
     return new Fretboard({
-      frets: 24,
+      frets: 12,
       scale: this.selectedScale.name,
       key: this.selectedKey,
     });

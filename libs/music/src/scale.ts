@@ -2,15 +2,15 @@ import { Note, ScaleType } from '@tonaljs/tonal';
 import { ScaleType as Scale } from '@tonaljs/scale-type';
 import { Scale as TonalScale } from '@tonaljs/scale';
 
-export const defaultScale = ScaleType.get('chromatic');
-export const defaultKey = 'C';
+export const defaultScale = ScaleType.get('aeolian');
+export const defaultKey = 'E';
 
 export const defaultScales = ScaleType.all().sort((a, b) => a.name.localeCompare(b.name));
 
 const transposeScale = (scale: Scale, key: string): string[] =>
   scale.intervals.map(Note.transposeFrom(key)).map(Note.simplify);
 
-export const defaultKeys = transposeScale(defaultScale, defaultKey).map((note) => Note.enharmonic(note));
+export const defaultKeys = transposeScale(ScaleType.get('chromatic'), defaultKey);
 
 export const scaleIncludes = (scale: TonalScale, note: string): boolean => {
   if (!scale || scale.empty || !scale.tonic || !note) {

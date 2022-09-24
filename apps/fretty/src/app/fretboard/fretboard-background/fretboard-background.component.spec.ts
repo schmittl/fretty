@@ -1,20 +1,18 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Fretboard } from '@fretty/music';
 
-import { FretboardSvgComponent } from './fretboard-svg.component';
+import { FretboardBackgroundComponent } from './fretboard-background.component';
 
-describe('FretboardSvgComponent', () => {
-  let component: FretboardSvgComponent;
-  let fixture: ComponentFixture<FretboardSvgComponent>;
+describe('FretboardBackgroundComponent', () => {
+  let component: FretboardBackgroundComponent;
+  let fixture: ComponentFixture<FretboardBackgroundComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FretboardSvgComponent],
-      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [FretboardBackgroundComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FretboardSvgComponent);
+    fixture = TestBed.createComponent(FretboardBackgroundComponent);
     component = fixture.componentInstance;
     component.fretboard = new Fretboard();
     fixture.detectChanges();

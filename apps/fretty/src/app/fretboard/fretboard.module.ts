@@ -4,9 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { FretboardContainerComponent } from './fretboard-container/fretboard-container.component';
 import { FretboardNoteComponent } from './fretboard-note/fretboard-note.component';
 import { FretboardSvgComponent } from './fretboard-svg/fretboard-svg.component';
+import { FretboardBackgroundComponent } from './fretboard-background/fretboard-background.component';
+import { FretboardNotesComponent } from './fretboard-notes/fretboard-notes.component';
 
 @NgModule({
-  declarations: [FretboardContainerComponent, FretboardNoteComponent, FretboardSvgComponent],
+  declarations: [
+    FretboardBackgroundComponent,
+    FretboardContainerComponent,
+    FretboardNoteComponent,
+    FretboardNotesComponent,
+    FretboardSvgComponent,
+  ],
   imports: [CommonModule, FormsModule],
   exports: [FretboardContainerComponent],
 })

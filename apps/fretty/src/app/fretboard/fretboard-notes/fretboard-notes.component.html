@@ -1,0 +1,21 @@
+<svg:g
+  *ngFor="let string of fretboard.notes; let row = index; let firstRow = first; let lastRow = last"
+  [attr.transform]="transformY(row)"
+>
+  <g
+    *ngFor="let note of string; let column = index; let firstColumn = first; let odd = odd"
+    [attr.transform]="transformX(column)"
+  >
+    <g
+      class="cursor-pointer"
+      [class.invisible]="!note.inScale"
+      [ngClass]="{
+        'fill-emerald-700 hover:fill-emerald-600': note.isTonic,
+        'fill-cyan-700 hover:fill-cyan-600': !note.isTonic
+      }"
+      fretty-fretboard-note
+      [note]="note.pitchclass"
+      [size]="noteSize"
+    ></g>
+  </g>
+</svg:g>

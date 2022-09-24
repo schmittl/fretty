@@ -1,0 +1,35 @@
+<svg:g
+  *ngFor="let string of fretboard.notes; let row = index; let firstRow = first; let lastRow = last"
+  [attr.transform]="transformY(row)"
+>
+  <line
+    attr.x1="{{ noteSpacing - notePadding - 7.5 }}"
+    attr.y1="{{ noteSize }}"
+    attr.x2="{{ noteSpacing * string.length - notePadding + 2.5 }}"
+    attr.y2="{{ noteSize }}"
+    class="stroke-stone-800"
+    attr.stroke-width="{{ 5 }}"
+  ></line>
+
+  <g
+    *ngFor="let note of string; let column = index; let firstColumn = first; let odd = odd"
+    [attr.transform]="transformX(column)"
+  >
+    <line
+      *ngIf="!lastRow"
+      attr.x1="{{ noteSpacing - notePadding }}"
+      attr.y1="{{ noteSize }}"
+      attr.x2="{{ noteSpacing - notePadding }}"
+      attr.y2="{{ noteSpacing + noteSize }}"
+      class="stroke-stone-800"
+      attr.stroke-width="{{ firstColumn ? 15 : 5 }}"
+    />
+    <circle
+      *ngIf="row === 3 && [3, 5, 7, 9, 12].includes(column)"
+      attr.cx="{{ noteSize }}"
+      attr.cy="{{ -notePadding }}"
+      attr.r="{{ notePadding }}"
+      class="fill-stone-800"
+    />
+  </g>
+</svg:g>

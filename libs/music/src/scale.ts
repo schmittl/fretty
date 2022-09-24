@@ -1,16 +1,12 @@
 import { Note, ScaleType } from '@tonaljs/tonal';
-import { ScaleType as Scale } from '@tonaljs/scale-type';
+import { ScaleType as TonalScaleType } from '@tonaljs/scale-type';
 import { Scale as TonalScale } from '@tonaljs/scale';
 
 export const defaultScale = ScaleType.get('aeolian');
 export const defaultKey = 'E';
 
 export const defaultScales = ScaleType.all().sort((a, b) => a.name.localeCompare(b.name));
-
-const transposeScale = (scale: Scale, key: string): string[] =>
-  scale.intervals.map(Note.transposeFrom(key)).map(Note.simplify);
-
-export const defaultKeys = transposeScale(ScaleType.get('chromatic'), defaultKey);
+export const defaultKeys = ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#'];
 
 export const scaleIncludes = (scale: TonalScale, note: string): boolean => {
   if (!scale || scale.empty || !scale.tonic || !note) {
@@ -34,3 +30,6 @@ const enharmonicIndexOf = (notes: string[], note: string): number => {
   }
   return index;
 };
+
+const transposeScale = (scale: TonalScaleType, key: string): string[] =>
+  scale.intervals.map(Note.transposeFrom(key)).map(Note.simplify);

@@ -9,7 +9,7 @@ export abstract class FretboardBaseComponent {
   noteSpacing = (this.noteSize + this.notePadding) * 2;
 
   viewBox(): string {
-    return `0 0 ${this.noteSpacing * this.fretboard.config.frets} ${
+    return `0 0 ${this.noteSpacing * (this.fretboard.config.frets + 1)} ${
       this.noteSize * 4 * this.fretboard.config.tuning.length
     }`;
   }

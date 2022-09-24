@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { defaultKey, defaultKeys, defaultScale, defaultScales, Fretboard } from '@fretty/music';
 
 @Component({
   selector: 'fretty-fretboard-container',
   templateUrl: './fretboard-container.component.html',
   styleUrls: ['./fretboard-container.component.scss'],
+  encapsulation: ViewEncapsulation.None, // https://github.com/tailwindlabs/tailwindcss.com/pull/759
 })
 export class FretboardContainerComponent {
   scales = defaultScales;

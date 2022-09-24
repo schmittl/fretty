@@ -66,7 +66,7 @@ export class Fretboard {
     const notesOnString = [startNote];
     const frets = this.config.frets;
 
-    for (let i = 1, currentNote = startNote; i < frets; i++) {
+    for (let i = 1, currentNote = startNote; i <= frets; i++) {
       const nextNote = this.nextNoteOnString(currentNote);
       notesOnString.push(nextNote);
       currentNote = nextNote;

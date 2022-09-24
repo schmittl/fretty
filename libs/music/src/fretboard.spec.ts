@@ -5,12 +5,12 @@ describe('Fretboard', () => {
     it('Returns default fretboard notes', () => {
       const fretboard = new Fretboard();
       expect(notes(fretboard)).toEqual([
-        ['E', 'F', 'F#', 'G', 'G#'],
-        ['B', 'C', 'C#', 'D', 'D#'],
-        ['G', 'G#', 'A', 'A#', 'B'],
-        ['D', 'D#', 'E', 'F', 'F#'],
-        ['A', 'A#', 'B', 'C', 'C#'],
-        ['E', 'F', 'F#', 'G', 'G#'],
+        ['E', 'F', 'F#', 'G', 'G#', 'A'],
+        ['B', 'C', 'C#', 'D', 'D#', 'E'],
+        ['G', 'G#', 'A', 'A#', 'B', 'C'],
+        ['D', 'D#', 'E', 'F', 'F#', 'G'],
+        ['A', 'A#', 'B', 'C', 'C#', 'D'],
+        ['E', 'F', 'F#', 'G', 'G#', 'A'],
       ]);
     });
 
@@ -33,7 +33,7 @@ describe('Fretboard', () => {
       const fretboard = new Fretboard({
         tuning: ['E'],
       });
-      expect(notes(fretboard)).toEqual([['E', 'F', 'F#', 'G', 'G#']]);
+      expect(notes(fretboard)).toEqual([['E', 'F', 'F#', 'G', 'G#', 'A']]);
     });
 
     it('Returns fretboard notes for two strings', () => {
@@ -41,8 +41,8 @@ describe('Fretboard', () => {
         tuning: ['E', 'A'],
       });
       expect(notes(fretboard)).toEqual([
-        ['A', 'A#', 'B', 'C', 'C#'],
-        ['E', 'F', 'F#', 'G', 'G#'],
+        ['A', 'A#', 'B', 'C', 'C#', 'D'],
+        ['E', 'F', 'F#', 'G', 'G#', 'A'],
       ]);
     });
 
@@ -52,8 +52,8 @@ describe('Fretboard', () => {
         stringOrder: 'low-first',
       });
       expect(notes(fretboard)).toEqual([
-        ['E', 'F', 'F#', 'G', 'G#'],
-        ['A', 'A#', 'B', 'C', 'C#'],
+        ['E', 'F', 'F#', 'G', 'G#', 'A'],
+        ['A', 'A#', 'B', 'C', 'C#', 'D'],
       ]);
     });
 
@@ -62,7 +62,7 @@ describe('Fretboard', () => {
         tuning: ['E'],
         accidentals: 'flats',
       });
-      expect(notes(fretboard)).toEqual([['E', 'F', 'Gb', 'G', 'Ab']]);
+      expect(notes(fretboard)).toEqual([['E', 'F', 'Gb', 'G', 'Ab', 'A']]);
     });
   });
 

@@ -7,10 +7,10 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test",
-    "lint": "nx lint && npm run prettier:check",
-    "prettier:check": "prettier --check .",
-    "prettier:write": "prettier --write ."
+    "test": "nx run-many --all --target=test",
+    "lint": "nx run-many --all --target=lint && npm run format:check",
+    "format:check": "nx format:check",
+    "format:write": "nx format:write"
   },
   "private": true,
   "dependencies": {

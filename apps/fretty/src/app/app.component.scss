@@ -1,4 +1,8 @@
 :host {
-  min-height: 100%;
+  height: 100%;
   display: block;
+}
+
+.fretboard-container {
+  height: calc(100% - 64px - 2.5rem); // subtract toolbar height and top margin
 }

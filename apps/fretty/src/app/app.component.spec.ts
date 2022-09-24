@@ -16,8 +16,4 @@ describe('AppComponent', () => {
   it('should create the app', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
-
-  it('should render title', () => {
-    expect(fixture.nativeElement.querySelector('h1')?.textContent).toContain('fretty');
-  });
 });

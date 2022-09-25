@@ -11,6 +11,8 @@ export class SettingsService {
   open(): void {
     this.dialog.open(SettingsComponent, {
       panelClass: 'settings-dialog',
+      width: '500px',
+      maxWidth: '100vw !important',
     });
   }
 }

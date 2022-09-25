@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { defaultKey, defaultKeys, defaultScale, defaultScales, Fretboard } from '@fretty/music';
+import { defaultKey, defaultScale, Fretboard } from '@fretty/music';
+import { FretboardSettings } from '../fretboard-settings/fretboard-settings';
 
 @Component({
   selector: 'fretty-fretboard-container',
@@ -8,23 +9,17 @@ import { defaultKey, defaultKeys, defaultScale, defaultScales, Fretboard } from 
   encapsulation: ViewEncapsulation.None, // https://github.com/tailwindlabs/tailwindcss.com/pull/759
 })
 export class FretboardContainerComponent {
-  scales = defaultScales;
-  keys = defaultKeys;
+  fretboard = new Fretboard({
+    frets: 12,
+    scale: defaultScale.name,
+    key: defaultKey,
+  });
 
-  selectedScale = defaultScale;
-  selectedKey = defaultKey;
-
-  fretboard = this.createFretboard();
-
-  updateFretboard(): void {
-    this.fretboard = this.createFretboard();
-  }
-
-  private createFretboard(): Fretboard {
-    return new Fretboard({
+  settingsChanged(settings: FretboardSettings): void {
+    this.fretboard = new Fretboard({
       frets: 12,
-      scale: this.selectedScale.name,
-      key: this.selectedKey,
+      scale: settings.scale,
+      key: settings.key,
     });
   }
 }

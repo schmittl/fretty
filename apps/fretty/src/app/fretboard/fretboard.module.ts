@@ -6,6 +6,7 @@ import { FretboardNoteComponent } from './fretboard-note/fretboard-note.componen
 import { FretboardSvgComponent } from './fretboard-svg/fretboard-svg.component';
 import { FretboardBackgroundComponent } from './fretboard-background/fretboard-background.component';
 import { FretboardNotesComponent } from './fretboard-notes/fretboard-notes.component';
+import { FretboardSettingsComponent } from './fretboard-settings/fretboard-settings.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { FretboardNotesComponent } from './fretboard-notes/fretboard-notes.compo
     FretboardContainerComponent,
     FretboardNoteComponent,
     FretboardNotesComponent,
+    FretboardSettingsComponent,
     FretboardSvgComponent,
   ],
   imports: [CommonModule, FormsModule],

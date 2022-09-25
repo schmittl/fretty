@@ -1,0 +1,14 @@
+<div class="text-xl flex items-center justify-center">
+  <div>
+    <span class="text-zinc-700 dark:text-zinc-100">Scale</span>
+    <select class="form-select block mt-2" [(ngModel)]="selectedScale" (ngModelChange)="onSettingsChanged()">
+      <option *ngFor="let scale of scales" [ngValue]="scale">{{ scale.name }}</option>
+    </select>
+  </div>
+  <div class="ml-2">
+    <span class="text-zinc-700 dark:text-zinc-100">Key</span>
+    <select class="form-select block mt-2" [(ngModel)]="selectedKey" (ngModelChange)="onSettingsChanged()">
+      <option *ngFor="let key of keys" [ngValue]="key">{{ key }}</option>
+    </select>
+  </div>
+</div>

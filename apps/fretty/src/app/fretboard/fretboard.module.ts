@@ -7,6 +7,7 @@ import { FretboardSvgComponent } from './fretboard-svg/fretboard-svg.component';
 import { FretboardBackgroundComponent } from './fretboard-background/fretboard-background.component';
 import { FretboardNotesComponent } from './fretboard-notes/fretboard-notes.component';
 import { FretboardSettingsComponent } from './fretboard-settings/fretboard-settings.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { FretboardSettingsComponent } from './fretboard-settings/fretboard-setti
     FretboardSettingsComponent,
     FretboardSvgComponent,
   ],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatSelectModule],
   exports: [FretboardContainerComponent],
 })
 export class FretboardModule {}

@@ -2,20 +2,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
-import { SettingsComponent } from './settings.component';
+import { SettingsDialogComponent } from './settings-dialog.component';
 
-describe('SettingsComponent', () => {
-  let component: SettingsComponent;
-  let fixture: ComponentFixture<SettingsComponent>;
+describe('SettingsDialogComponent', () => {
+  let component: SettingsDialogComponent;
+  let fixture: ComponentFixture<SettingsDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SettingsComponent],
+      declarations: [SettingsDialogComponent],
       imports: [MatDialogModule, MatIconModule],
       providers: [{ provide: MatDialogRef, useValue: {} }],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SettingsComponent);
+    fixture = TestBed.createComponent(SettingsDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

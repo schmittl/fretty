@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SettingsComponent } from './settings.component';
+import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ export class SettingsService {
   constructor(private readonly dialog: MatDialog) {}
 
   open(): void {
-    this.dialog.open(SettingsComponent, {
+    this.dialog.open(SettingsDialogComponent, {
       panelClass: 'settings-dialog',
       width: '500px',
       maxWidth: '100vw !important',

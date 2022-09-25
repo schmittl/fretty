@@ -5,7 +5,9 @@
       <mat-select
         [(value)]="selectedScale"
         (selectionChange)="onSettingsChanged()"
-        panelClass="bg-zinc-200 dark:bg-zinc-700"
+        panelClass="bg-zinc-200 dark:bg-zinc-700 max-w-fit"
+        [disableOptionCentering]="true"
+        [compareWith]="compareScale"
       >
         <mat-option *ngFor="let scale of scales" [value]="scale">
           {{ scale.name }}
@@ -20,6 +22,7 @@
         [(value)]="selectedKey"
         (selectionChange)="onSettingsChanged()"
         panelClass="bg-zinc-200 dark:bg-zinc-700"
+        [disableOptionCentering]="true"
       >
         <mat-option *ngFor="let key of keys" [value]="key">
           {{ key }}

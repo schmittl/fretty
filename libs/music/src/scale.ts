@@ -2,10 +2,20 @@ import { Note, ScaleType } from '@tonaljs/tonal';
 import { ScaleType as TonalScaleType } from '@tonaljs/scale-type';
 import { Scale as TonalScale } from '@tonaljs/scale';
 
-export const defaultScale = ScaleType.get('aeolian');
+export interface Scale {
+  name: string;
+  scale: TonalScaleType;
+}
+
+const scale = ScaleType.get('aeolian');
+export const defaultScale = { name: scale.name, scale };
 export const defaultKey = 'E';
 
-export const defaultScales = ScaleType.all().sort((a, b) => a.name.localeCompare(b.name));
+export const defaultScales = ScaleType.all()
+  .flatMap((scale) => {
+    return [{ name: scale.name, scale }, ...scale.aliases.map((alias) => ({ name: alias, scale }))];
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
 export const defaultKeys = ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#'];
 
 export const scaleIncludes = (scale: TonalScale, note: string): boolean => {

@@ -13,8 +13,8 @@ import { NoteLabels, SettingsState } from '../../store/settings/settings.state';
 })
 export class SettingsDialogComponent {
   frets = this.store.selectSnapshot(SettingsState.frets);
-  label = 'notes';
-  showFretNumbers$ = this.store.select(SettingsState.showFretNumbers);
+  noteLabels = [this.store.selectSnapshot(SettingsState.noteLabels)];
+  showFretNumbers = this.store.selectSnapshot(SettingsState.showFretNumbers);
 
   constructor(private readonly dialog: MatDialogRef<SettingsDialogComponent>, private readonly store: Store) {}
 

@@ -22,7 +22,7 @@
   </div>
 
   <div class="mx-2">
-    <mat-slide-toggle color="primary" [ngModel]="showFretNumbers$ | async" (change)="updateFretNumbers($event)">
+    <mat-slide-toggle color="primary" [(ngModel)]="showFretNumbers" (change)="updateFretNumbers($event)">
       Show fret numbers
     </mat-slide-toggle>
   </div>
@@ -32,7 +32,7 @@
       <label class="font-semibold">Note labels</label>
     </div>
     <div class="mt-4">
-      <mat-button-toggle-group multiple [value]="label" (change)="updateLabels($event)">
+      <mat-button-toggle-group multiple [value]="noteLabels" (change)="updateLabels($event)">
         <mat-button-toggle value="notes">Notes</mat-button-toggle>
         <mat-button-toggle value="intervals">Intervals</mat-button-toggle>
       </mat-button-toggle-group>

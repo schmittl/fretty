@@ -28,8 +28,13 @@ export class SettingsState {
     return state.fretboard;
   }
 
+  @Selector()
+  static frets(state: SettingsStateModel): number {
+    return state.fretboard.config.frets;
+  }
+
   @Action(UpdateFretboardConfig)
-  updateFretboard(ctx: StateContext<SettingsStateModel>, action: UpdateFretboardConfig) {
+  updateFretboard(ctx: StateContext<SettingsStateModel>, action: UpdateFretboardConfig): void {
     const state = ctx.getState();
     ctx.setState({
       ...state,

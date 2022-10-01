@@ -2,4 +2,21 @@
   <mat-icon class="close-icon" color="warn">close</mat-icon>
 </button>
 
-<div class="font-sans font-bold text-4xl text-zinc-100 text-center">Settings</div>
+<div mat-dialog-title class="font-sans font-bold text-4xl text-zinc-100 text-center">Settings</div>
+<mat-dialog-content>
+  <div>
+    <div class="flex justify-between font-semibold mx-2">
+      <label class="">Amount of frets</label>
+      <label class="example-name-label">{{ frets }}</label>
+    </div>
+    <mat-slider
+      class="w-full"
+      [min]="1"
+      [max]="24"
+      [step]="1"
+      [tickInterval]="1"
+      [(ngModel)]="frets"
+      (ngModelChange)="updateFrets($event)"
+    ></mat-slider>
+  </div>
+</mat-dialog-content>

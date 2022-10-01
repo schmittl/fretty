@@ -8,7 +8,7 @@ export interface Scale {
 }
 
 const scale = ScaleType.get('aeolian');
-export const defaultScale = { name: scale.name, scale };
+export const defaultScale: Scale = { name: scale.name, scale };
 export const defaultKey = 'E';
 
 export const defaultScales = ScaleType.all()

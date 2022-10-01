@@ -1,19 +1,24 @@
-<fretty-fretboard-settings (settingsChanged)="settingsChanged($event)"></fretty-fretboard-settings>
-
-<div
+<ng-container
   *ngIf="{
     fretboard: fretboard$ | async,
     noteLabels: noteLabels$ | async,
     showFretNumbers: showFretNumbers$ | async
   } as vm"
-  class="flex justify-center items-center md:fretboard-container"
 >
-  <svg
-    [attr.viewBox]="viewBox(vm.fretboard!)"
-    class="h-full w-full md:h-[60vh] md:w-[60vw]"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g fretty-fretboard-background [fretboard]="vm.fretboard!" [showFretNumbers]="vm.showFretNumbers!" />
-    <g fretty-fretboard-notes [fretboard]="vm.fretboard!" [noteLabels]="vm.noteLabels!" />
-  </svg>
-</div>
+  <fretty-fretboard-settings
+    [selectedScale]="vm.fretboard!.config.scale"
+    [selectedKey]="vm.fretboard!.config.key"
+    (settingsChanged)="settingsChanged($event)"
+  ></fretty-fretboard-settings>
+
+  <div class="flex justify-center items-center md:fretboard-container">
+    <svg
+      [attr.viewBox]="viewBox(vm.fretboard!)"
+      class="h-full w-full md:h-[60vh] md:w-[60vw]"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g fretty-fretboard-background [fretboard]="vm.fretboard!" [showFretNumbers]="vm.showFretNumbers!" />
+      <g fretty-fretboard-notes [fretboard]="vm.fretboard!" [noteLabels]="vm.noteLabels!" />
+    </svg>
+  </div>
+</ng-container>

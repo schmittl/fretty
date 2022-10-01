@@ -3,14 +3,13 @@
     <mat-form-field appearance="outline" color="accent">
       <mat-label>Scale</mat-label>
       <mat-select
-        [(value)]="selectedScale"
-        (selectionChange)="onSettingsChanged()"
+        [ngModel]="selectedScale"
+        (ngModelChange)="onScaleChanged($event)"
         panelClass="bg-zinc-200 dark:bg-zinc-700 max-w-fit"
         [disableOptionCentering]="true"
-        [compareWith]="compareScale"
       >
         <mat-option *ngFor="let scale of scales" [value]="scale">
-          {{ scale.name }}
+          {{ scale }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -19,8 +18,8 @@
     <mat-form-field appearance="outline" color="accent" class="w-20">
       <mat-label>Key</mat-label>
       <mat-select
-        [(value)]="selectedKey"
-        (selectionChange)="onSettingsChanged()"
+        [ngModel]="selectedKey"
+        (ngModelChange)="onKeyChanged($event)"
         panelClass="bg-zinc-200 dark:bg-zinc-700"
         [disableOptionCentering]="true"
       >

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { defaultKey, defaultScale, Fretboard } from '@fretty/music';
+import { defaultConfig, Fretboard, FretboardConfig } from '@fretty/music';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { ShowFretNumbers, UpdateFretboardConfig, UpdateNoteLabels } from './settings.actions';
+import { RestoreSettings, ShowFretNumbers, UpdateFretboardConfig, UpdateNoteLabels } from './settings.actions';
 
+// Note: needs to be serializable to restore from localStorage
 export interface SettingsStateModel {
-  fretboard: Fretboard;
+  version: number;
+  fretboardConfig: FretboardConfig;
   noteLabels: NoteLabels;
   showFretNumbers: boolean;
 }
@@ -12,11 +14,11 @@ export interface SettingsStateModel {
 export type NoteLabels = 'notes' | 'intervals' | 'none';
 
 const defaultState: SettingsStateModel = {
-  fretboard: new Fretboard({
+  version: 1,
+  fretboardConfig: {
+    ...defaultConfig,
     frets: 12,
-    scale: defaultScale.name,
-    key: defaultKey,
-  }),
+  },
   noteLabels: 'notes',
   showFretNumbers: false,
 };
@@ -29,22 +31,22 @@ const defaultState: SettingsStateModel = {
   providedIn: 'root',
 })
 export class SettingsState {
-  @Selector()
+  @Selector([SettingsState])
   static fretboard(state: SettingsStateModel): Fretboard {
-    return state.fretboard;
+    return new Fretboard(state.fretboardConfig);
   }
 
-  @Selector()
-  static frets(state: SettingsStateModel): number {
-    return state.fretboard.config.frets;
+  @Selector([SettingsState.fretboard])
+  static frets(fretboard: Fretboard): number {
+    return fretboard.config.frets;
   }
 
-  @Selector()
+  @Selector([SettingsState])
   static noteLabels(state: SettingsStateModel): NoteLabels {
     return state.noteLabels;
   }
 
-  @Selector()
+  @Selector([SettingsState])
   static showFretNumbers(state: SettingsStateModel): boolean {
     return state.showFretNumbers;
   }
@@ -54,7 +56,7 @@ export class SettingsState {
     const state = ctx.getState();
     ctx.setState({
       ...state,
-      fretboard: new Fretboard({ ...state.fretboard.config, ...action.config }),
+      fretboardConfig: { ...state.fretboardConfig, ...action.config },
     });
   }
 
@@ -73,6 +75,13 @@ export class SettingsState {
     ctx.setState({
       ...state,
       showFretNumbers: action.showFretNumbers,
+    });
+  }
+
+  @Action(RestoreSettings)
+  restoreSettings(ctx: StateContext<SettingsStateModel>): void {
+    ctx.setState({
+      ...defaultState,
     });
   }
 }

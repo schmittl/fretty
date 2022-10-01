@@ -41,6 +41,7 @@ $fretty-theme: mat.define-dark-theme(
 @include mat.form-field-theme($fretty-theme);
 @include mat.slider-theme($fretty-theme);
 @include mat.slide-toggle-theme($fretty-theme);
+@include mat.button-theme($fretty-theme);
 @include mat.button-toggle-theme($fretty-theme);
 
 @mixin mix-fretty-theme($fretty-theme) {
@@ -64,4 +65,12 @@ $fretty-theme: mat.define-dark-theme(
   .settings-dialog > mat-dialog-container {
     @apply bg-zinc-700;
   }
+}
+
+.mat-expansion-panel-header {
+  padding: 0 2px 0 0 !important;
+}
+
+.mat-expansion-panel-content > .mat-expansion-panel-body {
+  padding: 0 !important;
 }

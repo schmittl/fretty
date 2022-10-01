@@ -15,3 +15,7 @@ export class ShowFretNumbers {
   static readonly type = '[Settings] Show fret numbers';
   constructor(public showFretNumbers: boolean) {}
 }
+
+export class RestoreSettings {
+  static readonly type = '[Settings] Restore defaults';
+}

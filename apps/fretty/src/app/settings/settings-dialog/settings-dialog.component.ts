@@ -3,7 +3,12 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Store } from '@ngxs/store';
-import { ShowFretNumbers, UpdateFretboardConfig, UpdateNoteLabels } from '../../store/settings/settings.actions';
+import {
+  RestoreSettings,
+  ShowFretNumbers,
+  UpdateFretboardConfig,
+  UpdateNoteLabels,
+} from '../../store/settings/settings.actions';
 import { NoteLabels, SettingsState } from '../../store/settings/settings.state';
 
 @Component({
@@ -38,5 +43,10 @@ export class SettingsDialogComponent {
         this.store.dispatch(new UpdateNoteLabels('none'));
       }
     }
+  }
+
+  restoreSettings(): void {
+    this.store.dispatch(new RestoreSettings());
+    this.dialog.close();
   }
 }

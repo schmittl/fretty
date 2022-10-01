@@ -2,10 +2,12 @@
   <mat-icon class="close-icon" color="warn">close</mat-icon>
 </button>
 
-<div mat-dialog-title class="font-sans font-bold text-4xl text-zinc-100 text-center">Settings</div>
-<mat-dialog-content>
-  <div>
-    <div class="flex justify-between font-semibold mx-2">
+<div mat-dialog-title class="font-sans font-bold text-3xl text-zinc-100 text-center">
+  <span>Settings</span>
+</div>
+<mat-dialog-content class="font-sans">
+  <div class="mt-4">
+    <div class="flex justify-between font-semibold text-base mx-2">
       <label>Frets</label>
       <label>{{ frets }}</label>
     </div>
@@ -23,19 +25,50 @@
 
   <div class="mx-2">
     <mat-slide-toggle color="primary" [(ngModel)]="showFretNumbers" (change)="updateFretNumbers($event)">
-      Show fret numbers
+      <span class="font-sans text-sm">Show fret numbers</span>
     </mat-slide-toggle>
   </div>
 
   <div class="mt-4 mx-2">
-    <div>
-      <label class="font-semibold">Note labels</label>
+    <div class="font-semibold text-base">
+      <label>Note labels</label>
     </div>
     <div class="mt-4">
       <mat-button-toggle-group multiple [value]="noteLabels" (change)="updateLabels($event)">
-        <mat-button-toggle value="notes">Notes</mat-button-toggle>
-        <mat-button-toggle value="intervals">Intervals</mat-button-toggle>
+        <mat-button-toggle value="notes"><span class="text-sm">Notes</span></mat-button-toggle>
+        <mat-button-toggle value="intervals"><span class="text-sm">Intervals</span></mat-button-toggle>
       </mat-button-toggle-group>
     </div>
+  </div>
+
+  <div class="mt-4 mx-2">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="font-sans font-semibold text-base">Setting infos</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="text-sm mt-4">
+          All settings are only stored in the local storage of your browser and are attempted to be restored if the page
+          is reloaded.
+        </div>
+        <div class="text-sm">If you delete your browser cache your custom settings will also be lost</div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div class="mt-4 mx-2">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="font-sans font-semibold text-base">Restore default settings</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="mt-4">
+        <div class="text-sm">Click to restore default values for all settings</div>
+        <div class="mt-4">
+          <button mat-raised-button color="warn" (click)="restoreSettings()">
+            <mat-icon>delete</mat-icon><span class="ml-2 font-sans">Restore</span>
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
   </div>
 </mat-dialog-content>

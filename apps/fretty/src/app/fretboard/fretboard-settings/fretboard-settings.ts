@@ -1,4 +1,4 @@
 export interface FretboardSettings {
-  scale: string;
-  key: string;
+  scale?: string;
+  key?: string;
 }

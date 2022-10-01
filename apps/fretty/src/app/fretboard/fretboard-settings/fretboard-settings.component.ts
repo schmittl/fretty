@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { defaultKey, defaultKeys, defaultScale, defaultScales, Scale } from '@fretty/music';
 import { FretboardSettings } from './fretboard-settings';
 
@@ -7,20 +7,22 @@ import { FretboardSettings } from './fretboard-settings';
   templateUrl: './fretboard-settings.component.html',
 })
 export class FretboardSettingsComponent {
-  scales = defaultScales;
+  scales = defaultScales.map((scale) => scale.name);
   keys = defaultKeys;
 
-  selectedScale = defaultScale;
+  @Input()
+  selectedScale = defaultScale.name;
+  @Input()
   selectedKey = defaultKey;
 
   @Output()
   settingsChanged = new EventEmitter<FretboardSettings>();
 
-  onSettingsChanged(): void {
-    this.settingsChanged.emit({ scale: this.selectedScale.name, key: this.selectedKey });
+  onScaleChanged(scale: string): void {
+    this.settingsChanged.emit({ scale });
   }
 
-  compareScale(a: Scale, b: Scale): boolean {
-    return a === b || a?.name === b?.name;
+  onKeyChanged(key: string): void {
+    this.settingsChanged.emit({ key });
   }
 }

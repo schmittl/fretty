@@ -21,7 +21,7 @@ export class FretboardNotesComponent extends FretboardBaseComponent {
       case 'notes':
         return note.pitchclass;
       case 'intervals':
-        return note.interval;
+        return note.interval ? note.interval.replace(/(P|M)/, '') : '';
       default:
         return '';
     }

@@ -26,5 +26,9 @@ describe('scale', () => {
 
     expect(scaleInterval(scale, 'F')).toBe(undefined);
     expect(scaleInterval(scale, 'x')).toBe(undefined);
+
+    const altered = Scale.get('E altered');
+    expect(scaleInterval(altered, 'G')).toBe('2A');
+    expect(scaleInterval(altered, 'A#')).toBe('4A');
   });
 });

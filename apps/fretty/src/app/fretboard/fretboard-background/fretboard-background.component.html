@@ -15,6 +15,16 @@
     *ngFor="let note of string; let column = index; let firstColumn = first; let odd = odd"
     [attr.transform]="transformX(column)"
   >
+    <svg:text
+      *ngIf="!firstColumn && lastRow && showFretNumbers"
+      attr.x="{{ noteSpacing - notePadding }}"
+      attr.y="{{ noteSize * 2 }}"
+      class="text-4xl font-semibold font-mono fill-stone-800 select-none"
+      text-anchor="middle"
+      dominant-baseline="central"
+    >
+      {{ column }}
+    </svg:text>
     <line
       *ngIf="!lastRow"
       attr.x1="{{ noteSpacing - notePadding }}"
@@ -25,7 +35,7 @@
       attr.stroke-width="{{ firstColumn ? 15 : 5 }}"
     />
     <circle
-      *ngIf="row === 3 && [3, 5, 7, 9, 12].includes(column)"
+      *ngIf="!firstColumn && row === 3 && [0, 3, 5, 7, 9].includes(column % 12)"
       attr.cx="{{ noteSize }}"
       attr.cy="{{ -notePadding }}"
       attr.r="{{ notePadding }}"

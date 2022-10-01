@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { NgxsModule } from '@ngxs/store';
 
@@ -20,6 +21,7 @@ describe('SettingsDialogComponent', () => {
         MatButtonToggleModule,
         MatDialogModule,
         MatIconModule,
+        MatSlideToggleModule,
         MatSliderModule,
         NgxsModule.forRoot([]),
       ],

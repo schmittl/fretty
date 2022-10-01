@@ -6,10 +6,18 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [SettingsDialogComponent],
-  imports: [CommonModule, FormsModule, MatButtonToggleModule, MatDialogModule, MatIconModule, MatSliderModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonToggleModule,
+    MatDialogModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+  ],
   exports: [],
 })
 export class SettingsModule {}

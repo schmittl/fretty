@@ -40,6 +40,7 @@ $fretty-theme: mat.define-dark-theme(
 @include mat.select-theme($fretty-theme);
 @include mat.form-field-theme($fretty-theme);
 @include mat.slider-theme($fretty-theme);
+@include mat.slide-toggle-theme($fretty-theme);
 @include mat.button-toggle-theme($fretty-theme);
 
 @mixin mix-fretty-theme($fretty-theme) {

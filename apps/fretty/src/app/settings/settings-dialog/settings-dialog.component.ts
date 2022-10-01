@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Store } from '@ngxs/store';
-import { UpdateFretboardConfig, UpdateNoteLabels } from '../../store/settings/settings.actions';
+import { ShowFretNumbers, UpdateFretboardConfig, UpdateNoteLabels } from '../../store/settings/settings.actions';
 import { NoteLabels, SettingsState } from '../../store/settings/settings.state';
 
 @Component({
@@ -20,7 +21,11 @@ export class SettingsDialogComponent {
     this.store.dispatch(new UpdateFretboardConfig({ frets }));
   }
 
-  changeLabels(event: MatButtonToggleChange): void {
+  updateFretNumbers(event: MatSlideToggleChange): void {
+    this.store.dispatch(new ShowFretNumbers(event.checked));
+  }
+
+  updateLabels(event: MatButtonToggleChange): void {
     const toggle = event.source;
     if (toggle) {
       const value = event.value as NoteLabels[];

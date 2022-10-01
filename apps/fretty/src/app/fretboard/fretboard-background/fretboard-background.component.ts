@@ -11,4 +11,7 @@ import { FretboardBaseComponent } from '../fretboard-base.component';
 export class FretboardBackgroundComponent extends FretboardBaseComponent {
   @Input()
   fretboard!: Fretboard;
+
+  @Input()
+  showFretNumbers = false;
 }

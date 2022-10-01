@@ -10,3 +10,8 @@ export class UpdateNoteLabels {
   static readonly type = '[Settings] Update note labels';
   constructor(public noteLabels: NoteLabels) {}
 }
+
+export class ShowFretNumbers {
+  static readonly type = '[Settings] Show fret numbers';
+  constructor(public showFretNumbers: boolean) {}
+}

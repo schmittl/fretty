@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { defaultKey, defaultScale, Fretboard } from '@fretty/music';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { UpdateFretboardConfig, UpdateNoteLabels } from './settings.actions';
+import { ShowFretNumbers, UpdateFretboardConfig, UpdateNoteLabels } from './settings.actions';
 
 export interface SettingsStateModel {
   fretboard: Fretboard;
   noteLabels: NoteLabels;
+  showFretNumbers: boolean;
 }
 
 export type NoteLabels = 'notes' | 'intervals' | 'none';
@@ -17,6 +18,7 @@ const defaultState: SettingsStateModel = {
     key: defaultKey,
   }),
   noteLabels: 'notes',
+  showFretNumbers: false,
 };
 
 @State<SettingsStateModel>({
@@ -42,6 +44,11 @@ export class SettingsState {
     return state.noteLabels;
   }
 
+  @Selector()
+  static showFretNumbers(state: SettingsStateModel): boolean {
+    return state.showFretNumbers;
+  }
+
   @Action(UpdateFretboardConfig)
   updateFretboard(ctx: StateContext<SettingsStateModel>, action: UpdateFretboardConfig): void {
     const state = ctx.getState();
@@ -52,11 +59,20 @@ export class SettingsState {
   }
 
   @Action(UpdateNoteLabels)
-  updateNoteLabels(ctx: StateContext<SettingsStateModel>, action: UpdateNoteLabels): void {
+  showFretNumbers(ctx: StateContext<SettingsStateModel>, action: UpdateNoteLabels): void {
     const state = ctx.getState();
     ctx.setState({
       ...state,
       noteLabels: action.noteLabels,
+    });
+  }
+
+  @Action(ShowFretNumbers)
+  updateNoteLabels(ctx: StateContext<SettingsStateModel>, action: ShowFretNumbers): void {
+    const state = ctx.getState();
+    ctx.setState({
+      ...state,
+      showFretNumbers: action.showFretNumbers,
     });
   }
 }

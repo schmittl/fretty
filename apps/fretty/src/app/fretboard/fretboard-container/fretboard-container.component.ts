@@ -26,7 +26,7 @@ export class FretboardContainerComponent extends FretboardBaseComponent {
   }
 
   viewBox(fretboard: Fretboard): string {
-    return `0 ${this.noteSize * -4} ${this.noteSpacing * (fretboard.config.frets + 1)} ${
+    return `0 ${this.noteSize * -4} ${this.noteSpacing * (fretboard.config.frets + 1) + this.notePadding} ${
       this.noteSize * 4 * fretboard.config.tuning.length
     }`;
   }

@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSliderModule } from '@angular/material/slider';
+import { NgxsModule } from '@ngxs/store';
 
 import { SettingsDialogComponent } from './settings-dialog.component';
 
@@ -11,7 +15,14 @@ describe('SettingsDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SettingsDialogComponent],
-      imports: [MatDialogModule, MatIconModule],
+      imports: [
+        FormsModule,
+        MatButtonToggleModule,
+        MatDialogModule,
+        MatIconModule,
+        MatSliderModule,
+        NgxsModule.forRoot([]),
+      ],
       providers: [{ provide: MatDialogRef, useValue: {} }],
     }).compileComponents();
 

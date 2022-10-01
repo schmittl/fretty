@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Fretboard } from '@fretty/music';
+import { Fretboard, FretboardNote } from '@fretty/music';
+import { NoteLabels } from '../../store/settings/settings.state';
 import { FretboardBaseComponent } from '../fretboard-base.component';
 
 @Component({
@@ -11,4 +12,18 @@ import { FretboardBaseComponent } from '../fretboard-base.component';
 export class FretboardNotesComponent extends FretboardBaseComponent {
   @Input()
   fretboard!: Fretboard;
+
+  @Input()
+  noteLabels!: NoteLabels;
+
+  getNoteLabel(note: FretboardNote): string {
+    switch (this.noteLabels) {
+      case 'notes':
+        return note.pitchclass;
+      case 'intervals':
+        return note.interval;
+      default:
+        return '';
+    }
+  }
 }

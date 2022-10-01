@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NgxsModule } from '@ngxs/store';
-import { environment } from '@environment/environment';
+import { environment } from '../../environments/environment';
 import { SettingsState } from './settings/settings.state';
 
 @NgModule({

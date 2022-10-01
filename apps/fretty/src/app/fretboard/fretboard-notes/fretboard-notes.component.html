@@ -14,7 +14,7 @@
         'fill-cyan-700 hover:fill-cyan-600': !note.isTonic
       }"
       fretty-fretboard-note
-      [note]="note.pitchclass"
+      [note]="getNoteLabel(note)"
       [size]="noteSize"
     ></g>
   </g>

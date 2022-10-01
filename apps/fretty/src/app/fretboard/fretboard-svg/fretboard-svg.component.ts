@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Fretboard } from '@fretty/music';
+import { NoteLabels } from '../../store/settings/settings.state';
 import { FretboardBaseComponent } from '../fretboard-base.component';
 
 @Component({
@@ -10,4 +11,6 @@ import { FretboardBaseComponent } from '../fretboard-base.component';
 export class FretboardSvgComponent extends FretboardBaseComponent {
   @Input()
   fretboard!: Fretboard;
+  @Input()
+  noteLabels!: NoteLabels;
 }

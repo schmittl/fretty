@@ -1,5 +1,8 @@
 <fretty-fretboard-settings (settingsChanged)="settingsChanged($event)"></fretty-fretboard-settings>
 
-<div *ngIf="fretboard$ | async as fretboard" class="flex justify-center items-center md:fretboard-container">
-  <fretty-fretboard-svg [fretboard]="fretboard"></fretty-fretboard-svg>
+<div
+  *ngIf="{ fretboard: fretboard$ | async, noteLabels: noteLabels$ | async } as vm"
+  class="flex justify-center items-center md:fretboard-container"
+>
+  <fretty-fretboard-svg [fretboard]="vm.fretboard!" [noteLabels]="vm.noteLabels!"></fretty-fretboard-svg>
 </div>

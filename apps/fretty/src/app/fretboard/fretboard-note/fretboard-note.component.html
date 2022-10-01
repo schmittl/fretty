@@ -1,8 +1,9 @@
 <svg:circle attr.cx="{{ size }}" attr.cy="{{ size }}" attr.r="{{ size * 0.9 }}" />
 <svg:text
+  *ngIf="note"
   attr.x="{{ size }}"
   attr.y="{{ size }}"
-  class="text-4xl font-semibold fill-neutral-200 select-none"
+  class="text-3xl font-mono fill-neutral-200 select-none"
   text-anchor="middle"
   dominant-baseline="central"
 >

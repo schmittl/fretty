@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { UpdateFretboardConfig } from '@store/settings/settings.actions';
-import { SettingsState } from '@store/settings/settings.state';
+import { UpdateFretboardConfig } from '../../store/settings/settings.actions';
+import { SettingsState } from '../../store/settings/settings.state';
 import { FretboardSettings } from '../fretboard-settings/fretboard-settings';
 
 @Component({
@@ -12,6 +12,7 @@ import { FretboardSettings } from '../fretboard-settings/fretboard-settings';
 })
 export class FretboardContainerComponent {
   fretboard$ = this.store.select(SettingsState.fretboard);
+  noteLabels$ = this.store.select(SettingsState.noteLabels);
 
   constructor(private readonly store: Store) {}
 

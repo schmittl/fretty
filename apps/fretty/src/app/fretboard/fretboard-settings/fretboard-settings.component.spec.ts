@@ -1,6 +1,7 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FretboardSettingsComponent } from './fretboard-settings.component';
 
 describe('FretboardSettingsComponent', () => {
@@ -10,7 +11,7 @@ describe('FretboardSettingsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FretboardSettingsComponent],
-      imports: [FormsModule],
+      imports: [FormsModule, MatSelectModule, NoopAnimationsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FretboardSettingsComponent);

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngxs/store';
-import { UpdateFretboardConfig } from '@store/settings/settings.actions';
-import { SettingsState } from '@store/settings/settings.state';
+import { UpdateFretboardConfig, UpdateNoteLabels } from '../../store/settings/settings.actions';
+import { NoteLabels, SettingsState } from '../../store/settings/settings.state';
 
 @Component({
   selector: 'fretty-settings',
@@ -11,10 +12,25 @@ import { SettingsState } from '@store/settings/settings.state';
 })
 export class SettingsDialogComponent {
   frets = this.store.selectSnapshot(SettingsState.frets);
+  label = 'notes';
 
   constructor(private readonly dialog: MatDialogRef<SettingsDialogComponent>, private readonly store: Store) {}
 
   updateFrets(frets: number): void {
     this.store.dispatch(new UpdateFretboardConfig({ frets }));
+  }
+
+  changeLabels(event: MatButtonToggleChange): void {
+    const toggle = event.source;
+    if (toggle) {
+      const value = event.value as NoteLabels[];
+      const group = toggle.buttonToggleGroup;
+      if (value.some((item) => item == toggle.value)) {
+        group.value = [toggle.value];
+        this.store.dispatch(new UpdateNoteLabels(toggle.value));
+      } else {
+        this.store.dispatch(new UpdateNoteLabels('none'));
+      }
+    }
   }
 }

@@ -10,6 +10,7 @@ import {
   UpdateNoteLabels,
 } from '../../store/settings/settings.actions';
 import { NoteLabels, SettingsState } from '../../store/settings/settings.state';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'fretty-settings',
@@ -21,7 +22,22 @@ export class SettingsDialogComponent {
   noteLabels = [this.store.selectSnapshot(SettingsState.noteLabels)];
   showFretNumbers = this.store.selectSnapshot(SettingsState.showFretNumbers);
 
-  constructor(private readonly dialog: MatDialogRef<SettingsDialogComponent>, private readonly store: Store) {}
+  constructor(
+    private readonly dialog: MatDialogRef<SettingsDialogComponent>,
+    private readonly store: Store,
+    private readonly breakpointObserver: BreakpointObserver
+  ) {
+    const smallDialogSubscription = this.breakpointObserver.observe([Breakpoints.XSmall]).subscribe((size) => {
+      if (size.matches) {
+        dialog.updateSize('100vw', '100vh');
+      } else {
+        dialog.updateSize('500px', '');
+      }
+    });
+    dialog.afterClosed().subscribe(() => {
+      smallDialogSubscription.unsubscribe();
+    });
+  }
 
   updateFrets(frets: number): void {
     this.store.dispatch(new UpdateFretboardConfig({ frets }));

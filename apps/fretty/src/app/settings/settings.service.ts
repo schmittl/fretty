@@ -11,7 +11,7 @@ export class SettingsService {
   open(): void {
     this.dialog.open(SettingsDialogComponent, {
       panelClass: 'settings-dialog',
-      width: '500px',
+      autoFocus: '#frets-slider',
       maxWidth: '100vw !important',
     });
   }

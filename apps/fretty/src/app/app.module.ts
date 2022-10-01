@@ -7,10 +7,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { SettingsModule } from './settings/settings.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StoreModule } from './store/store.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserAnimationsModule, BrowserModule, FretboardModule, ToolbarModule, SettingsModule, MatDialogModule],
+  imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
+    FretboardModule,
+    ToolbarModule,
+    SettingsModule,
+    StoreModule,
+    MatDialogModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

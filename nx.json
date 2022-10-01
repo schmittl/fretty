@@ -39,7 +39,12 @@
     "sharedGlobals": []
   },
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "cache": {
+      "enabled": true,
+      "environment": "local",
+      "path": ".angular/cache"
+    }
   },
   "generators": {
     "@nrwl/angular:application": {

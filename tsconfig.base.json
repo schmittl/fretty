@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@fretty/music": ["libs/music/src/index.ts"]
+      "@fretty/music": ["libs/music/src/index.ts"],
+      "@environment/*": ["apps/fretty/src/environments/*"],
+      "@store/*": ["apps/fretty/src/app/store/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

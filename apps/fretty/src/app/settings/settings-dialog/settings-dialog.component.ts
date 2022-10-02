@@ -28,7 +28,7 @@ export class SettingsDialogComponent {
     private readonly store: Store,
     private readonly breakpointObserver: BreakpointObserver
   ) {
-    const smallDialogSubscription = this.breakpointObserver.observe([Breakpoints.XSmall]).subscribe((size) => {
+    const smallDialogSubscription = this.breakpointObserver.observe([Breakpoints.Handset]).subscribe((size) => {
       if (size.matches) {
         dialog.updateSize('100vw', '100vh');
       } else {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { ToggleSettingsDialog } from '../store/settings/settings.actions';
+import { ToggleHotkeysDialog, ToggleSettingsDialog } from '../store/dialog/dialog.actions';
 
 @Component({
   selector: 'fretty-toolbar',
@@ -11,5 +11,9 @@ export class ToolbarComponent {
 
   openSettings(): void {
     this.store.dispatch(new ToggleSettingsDialog());
+  }
+
+  openHotkeys(): void {
+    this.store.dispatch(new ToggleHotkeysDialog());
   }
 }

@@ -2,14 +2,10 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Hotkey, HotkeyGroup, HotkeysService as NgHotkeysService } from '@ngneat/hotkeys';
 import { Store } from '@ngxs/store';
-import { filter, MonoTypeOperatorFunction, Observable, take } from 'rxjs';
+import { filter, MonoTypeOperatorFunction, Observable } from 'rxjs';
 import { HotkeysHelpComponent } from './hotkeys-help.component';
-import {
-  ShowFretNumbers,
-  ToggleIntervals,
-  ToggleSettingsDialog,
-  UpdateNoteLabels,
-} from '../store/settings/settings.actions';
+import { ShowFretNumbers, ToggleIntervals, UpdateNoteLabels } from '../store/settings/settings.actions';
+import { ToggleHotkeysDialog, ToggleSettingsDialog } from '../store/dialog/dialog.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -71,23 +67,7 @@ export class HotkeysService {
 
   private registerHelpModal(): void {
     this.hotkeys.registerHelpModal(() => {
-      if (this.ref) {
-        this.ref.close();
-        this.ref = undefined;
-      } else {
-        this.ref = this.dialog.open(HotkeysHelpComponent, {
-          width: '500px',
-          maxWidth: '100vw !important',
-          panelClass: 'fretty-dialog',
-          autoFocus: false,
-        });
-        this.ref
-          .afterClosed()
-          .pipe(take(1))
-          .subscribe(() => {
-            this.ref = undefined;
-          });
-      }
+      this.store.dispatch(new ToggleHotkeysDialog());
     });
   }
 }

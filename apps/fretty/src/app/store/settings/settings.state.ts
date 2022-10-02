@@ -1,11 +1,7 @@
-import { Injectable, NgZone } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Injectable } from '@angular/core';
 import { defaultConfig, Fretboard, FretboardConfig } from '@fretty/music';
 import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
-import { take } from 'rxjs';
-import { SettingsDialogComponent } from '../../settings/settings-dialog/settings-dialog.component';
 import {
-  ToggleSettingsDialog,
   RestoreSettings,
   ShowFretNumbers,
   UpdateFretboardConfig,
@@ -43,9 +39,7 @@ const defaultState: SettingsStateModel = {
   providedIn: 'root',
 })
 export class SettingsState {
-  private settingsDialogRef: MatDialogRef<SettingsDialogComponent> | undefined;
-
-  constructor(private store: Store, private readonly dialog: MatDialog, private ngZone: NgZone) {}
+  constructor(private store: Store) {}
 
   @Selector([SettingsState])
   static fretboard(state: SettingsStateModel): Fretboard {
@@ -136,29 +130,6 @@ export class SettingsState {
         }
       }
     }
-  }
-
-  @Action(ToggleSettingsDialog)
-  toggleSettingsDialog(): void {
-    // ngxs runs all actions outside the angular zone. We need to be in zone to close dialog via button
-    this.ngZone.run(() => {
-      if (this.settingsDialogRef) {
-        this.settingsDialogRef.close();
-        this.settingsDialogRef = undefined;
-      } else {
-        this.settingsDialogRef = this.dialog.open(SettingsDialogComponent, {
-          panelClass: 'fretty-dialog',
-          autoFocus: '#frets-slider',
-          maxWidth: '100vw !important',
-        });
-        this.settingsDialogRef
-          .afterClosed()
-          .pipe(take(1))
-          .subscribe(() => {
-            this.settingsDialogRef = undefined;
-          });
-      }
-    });
   }
 
   private nextLabelType(current: NoteLabels): NoteLabels {

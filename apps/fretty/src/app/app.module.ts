@@ -8,6 +8,7 @@ import { ToolbarModule } from './toolbar/toolbar.module';
 import { SettingsModule } from './settings/settings.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StoreModule } from './store/store.module';
+import { HotkeysModule } from './hotkeys/hotkeys.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,10 +16,11 @@ import { StoreModule } from './store/store.module';
     BrowserAnimationsModule,
     BrowserModule,
     FretboardModule,
-    ToolbarModule,
+    HotkeysModule,
+    MatDialogModule,
     SettingsModule,
     StoreModule,
-    MatDialogModule,
+    ToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

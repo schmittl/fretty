@@ -15,7 +15,7 @@ body {
   margin: 0;
 }
 
-$background-color: rgb(63 63 70 / var(--tw-bg-opacity));
+$fretty-background-color: rgb(63 63 70);
 
 @include mat.core();
 
@@ -34,6 +34,27 @@ $fretty-theme: mat.define-dark-theme(
   )
 );
 
+$palette-color: map-get($fretty-theme, color);
+$background: map-get($palette-color, background);
+$background: map_merge(
+  $background,
+  (
+    background: $fretty-background-color,
+  )
+);
+$palette-color: map_merge(
+  $palette-color,
+  (
+    background: $background,
+  )
+);
+$fretty-theme: map_merge(
+  $fretty-theme,
+  (
+    color: $palette-color,
+  )
+);
+
 @include mat.core-theme($fretty-theme);
 @include mat.toolbar-theme($fretty-theme);
 @include mat.dialog-theme($fretty-theme);
@@ -49,7 +70,7 @@ $fretty-theme: mat.define-dark-theme(
   $accent: map-get($fretty-theme, accent);
 
   .mat-button-toggle {
-    background-color: $background-color;
+    background-color: $fretty-background-color;
     color: mat-color($primary, default-contrast);
   }
 
@@ -62,7 +83,7 @@ $fretty-theme: mat.define-dark-theme(
 @include mix-fretty-theme($fretty-theme);
 
 @layer components {
-  .settings-dialog > mat-dialog-container {
+  .fretty-dialog > mat-dialog-container {
     @apply bg-zinc-700;
   }
 }

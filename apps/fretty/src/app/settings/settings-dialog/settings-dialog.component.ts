@@ -20,7 +20,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class SettingsDialogComponent {
   frets = this.store.selectSnapshot(SettingsState.frets);
   noteLabels = [this.store.selectSnapshot(SettingsState.noteLabels)];
-  showFretNumbers = this.store.selectSnapshot(SettingsState.showFretNumbers);
+  showFretNumbers = this.store.select(SettingsState.showFretNumbers);
 
   constructor(
     private readonly dialog: MatDialogRef<SettingsDialogComponent>,

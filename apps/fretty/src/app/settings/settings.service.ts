@@ -10,7 +10,7 @@ export class SettingsService {
 
   open(): void {
     this.dialog.open(SettingsDialogComponent, {
-      panelClass: 'settings-dialog',
+      panelClass: 'fretty-dialog',
       autoFocus: '#frets-slider',
       maxWidth: '100vw !important',
     });

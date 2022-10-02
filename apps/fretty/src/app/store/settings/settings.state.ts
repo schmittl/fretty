@@ -61,7 +61,7 @@ export class SettingsState {
   }
 
   @Action(UpdateNoteLabels)
-  showFretNumbers(ctx: StateContext<SettingsStateModel>, action: UpdateNoteLabels): void {
+  updateNoteLabels(ctx: StateContext<SettingsStateModel>, action: UpdateNoteLabels): void {
     const state = ctx.getState();
     ctx.setState({
       ...state,
@@ -70,11 +70,11 @@ export class SettingsState {
   }
 
   @Action(ShowFretNumbers)
-  updateNoteLabels(ctx: StateContext<SettingsStateModel>, action: ShowFretNumbers): void {
+  showFretNumbers(ctx: StateContext<SettingsStateModel>, action: ShowFretNumbers): void {
     const state = ctx.getState();
     ctx.setState({
       ...state,
-      showFretNumbers: action.showFretNumbers,
+      showFretNumbers: action.showFretNumbers ?? !state.showFretNumbers,
     });
   }
 

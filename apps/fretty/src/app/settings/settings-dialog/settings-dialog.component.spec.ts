@@ -8,6 +8,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
+import { EMPTY, of } from 'rxjs';
 
 import { SettingsDialogComponent } from './settings-dialog.component';
 
@@ -29,7 +30,7 @@ describe('SettingsDialogComponent', () => {
         NgxsModule.forRoot([]),
         NoopAnimationsModule,
       ],
-      providers: [{ provide: MatDialogRef, useValue: {} }],
+      providers: [{ provide: MatDialogRef, useValue: { afterClosed: () => of(EMPTY) } }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SettingsDialogComponent);

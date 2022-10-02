@@ -1,0 +1,30 @@
+<button mat-icon-button class="close-button float-right text-zinc-100" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<h2 mat-dialog-title>Available Hotkeys</h2>
+<mat-dialog-content class="font-sans"
+  ><table
+    class="border-collapse w-full mb-4 border-solid border-2 border-zinc-200"
+    cellspacing="0"
+    *ngFor="let hotkeyGroup of hotkeys"
+  >
+    <thead *ngIf="hotkeyGroup.group">
+      <tr>
+        <th class="text-neutral-700 bg-zinc-200 px-4 py-2 border-0" colspan="2">
+          {{ hotkeyGroup.group }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hotkey of hotkeyGroup.hotkeys">
+        <td class="px-4 py-2 w-1/2">{{ hotkey.description }}</td>
+        <td class="text-center px-4 py-2 w-1/2">
+          <kbd
+            class="text-xs mr-2 text-neutral-700 bg-zinc-200 p-1 rounded shadow-inner border-solid border-b-2 border-zinc-400"
+            [innerHTML]="hotkey.keys | hotkeysShortcut"
+          ></kbd>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>

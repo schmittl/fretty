@@ -24,7 +24,17 @@ export class HotkeysService {
   }
 
   getShortcuts(): HotkeyGroup[] {
-    return this.hotkeys.getShortcuts();
+    const shortcuts = this.hotkeys.getShortcuts();
+    const fretboardShortcuts = shortcuts.find((shortcut) => shortcut.group === 'Fretboard');
+    fretboardShortcuts?.hotkeys.push({
+      description: 'Toggle notes based on interval',
+      keys: '1-7',
+    });
+    fretboardShortcuts?.hotkeys.push({
+      description: 'Restore all notes',
+      keys: '0',
+    });
+    return shortcuts;
   }
 
   private registerHotkeys(): void {

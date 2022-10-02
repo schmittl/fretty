@@ -16,6 +16,7 @@ export class FretboardContainerComponent extends FretboardBaseComponent {
   fretboard$ = this.store.select(SettingsState.fretboard);
   noteLabels$ = this.store.select(SettingsState.noteLabels);
   showFretNumbers$ = this.store.select(SettingsState.showFretNumbers);
+  selectedIntervals$ = this.store.select(SettingsState.selectedIntervals);
 
   constructor(private readonly store: Store) {
     super();

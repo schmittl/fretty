@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { defaultConfig, Fretboard, FretboardConfig } from '@fretty/music';
-import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
 import { take } from 'rxjs';
 import { SettingsDialogComponent } from '../../settings/settings-dialog/settings-dialog.component';
 import {
@@ -10,6 +10,7 @@ import {
   ShowFretNumbers,
   UpdateFretboardConfig,
   UpdateNoteLabels,
+  ToggleIntervals,
 } from './settings.actions';
 
 // Note: needs to be serializable to restore from localStorage
@@ -18,6 +19,7 @@ export interface SettingsStateModel {
   fretboardConfig: FretboardConfig;
   noteLabels: NoteLabels;
   showFretNumbers: boolean;
+  selectedIntervals?: string[];
 }
 
 const noteLabels = ['notes', 'intervals', 'none'] as const;
@@ -41,9 +43,9 @@ const defaultState: SettingsStateModel = {
   providedIn: 'root',
 })
 export class SettingsState {
-  private settingsDialogRef: MatDialogRef<SettingsDialogComponent, unknown> | undefined;
+  private settingsDialogRef: MatDialogRef<SettingsDialogComponent> | undefined;
 
-  constructor(private readonly dialog: MatDialog, private ngZone: NgZone) {}
+  constructor(private store: Store, private readonly dialog: MatDialog, private ngZone: NgZone) {}
 
   @Selector([SettingsState])
   static fretboard(state: SettingsStateModel): Fretboard {
@@ -65,12 +67,21 @@ export class SettingsState {
     return state.showFretNumbers;
   }
 
+  @Selector([SettingsState, SettingsState.fretboard])
+  static selectedIntervals(state: SettingsStateModel, fretboard: Fretboard): string[] {
+    if (state.selectedIntervals == null) {
+      return fretboard.intervals;
+    }
+    return state.selectedIntervals;
+  }
+
   @Action(UpdateFretboardConfig)
   updateFretboard(ctx: StateContext<SettingsStateModel>, action: UpdateFretboardConfig): void {
     const state = ctx.getState();
     ctx.setState({
       ...state,
       fretboardConfig: { ...state.fretboardConfig, ...action.config },
+      selectedIntervals: undefined,
     });
   }
 
@@ -99,8 +110,37 @@ export class SettingsState {
     });
   }
 
+  @Action(ToggleIntervals)
+  toggleIntervals(ctx: StateContext<SettingsStateModel>, action: ToggleIntervals): void {
+    const state = ctx.getState();
+    const fretboard = this.store.selectSnapshot(SettingsState.fretboard);
+    const key = action.key;
+    if (key === '0') {
+      ctx.setState({
+        ...state,
+        selectedIntervals: [...fretboard.intervals],
+      });
+    } else {
+      if (fretboard.intervals.length === state.selectedIntervals?.length) {
+        ctx.setState({
+          ...state,
+          selectedIntervals: fretboard.intervals.filter((interval) => interval.includes(key)),
+        });
+      } else {
+        const typedIntervals = fretboard.intervals.filter((interval) => interval.includes(key));
+        if (typedIntervals.length > 0 && !typedIntervals.every((e) => state.selectedIntervals?.includes(e))) {
+          ctx.setState({
+            ...state,
+            selectedIntervals: [...(state.selectedIntervals ?? []), ...typedIntervals],
+          });
+        }
+      }
+    }
+  }
+
   @Action(ToggleSettingsDialog)
   toggleSettingsDialog(): void {
+    // ngxs runs all actions outside the angular zone. We need to be in zone to close dialog via button
     this.ngZone.run(() => {
       if (this.settingsDialogRef) {
         this.settingsDialogRef.close();

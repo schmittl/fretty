@@ -50,6 +50,10 @@ export class Fretboard {
     return this._notes;
   }
 
+  get intervals(): string[] {
+    return this._scale.intervals;
+  }
+
   private notesOnFretboard(): FretboardNote[][] {
     const notesOnFretboard: FretboardNote[][] = [];
     const notesOfTuning =

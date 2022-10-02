@@ -2,7 +2,8 @@
   *ngIf="{
     fretboard: fretboard$ | async,
     noteLabels: noteLabels$ | async,
-    showFretNumbers: showFretNumbers$ | async
+    showFretNumbers: showFretNumbers$ | async,
+    selectedIntervals: selectedIntervals$ | async
   } as vm"
 >
   <fretty-fretboard-settings
@@ -18,7 +19,12 @@
       xmlns="http://www.w3.org/2000/svg"
     >
       <g fretty-fretboard-background [fretboard]="vm.fretboard!" [showFretNumbers]="vm.showFretNumbers!" />
-      <g fretty-fretboard-notes [fretboard]="vm.fretboard!" [noteLabels]="vm.noteLabels!" />
+      <g
+        fretty-fretboard-notes
+        [fretboard]="vm.fretboard!"
+        [noteLabels]="vm.noteLabels!"
+        [selectedIntervals]="vm.selectedIntervals!"
+      />
     </svg>
   </div>
 </ng-container>

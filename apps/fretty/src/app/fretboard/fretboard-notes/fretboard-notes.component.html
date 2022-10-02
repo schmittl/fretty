@@ -8,7 +8,7 @@
   >
     <g
       class="cursor-pointer"
-      [class.invisible]="!note.inScale"
+      [class.invisible]="hideNote(note)"
       [ngClass]="{
         'fill-emerald-700 hover:fill-emerald-600': note.isTonic,
         'fill-cyan-700 hover:fill-cyan-600': !note.isTonic

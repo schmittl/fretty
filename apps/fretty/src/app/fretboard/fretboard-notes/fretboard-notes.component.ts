@@ -16,6 +16,9 @@ export class FretboardNotesComponent extends FretboardBaseComponent {
   @Input()
   noteLabels!: NoteLabels;
 
+  @Input()
+  selectedIntervals!: string[];
+
   getNoteLabel(note: FretboardNote): string {
     switch (this.noteLabels) {
       case 'notes':
@@ -25,5 +28,12 @@ export class FretboardNotesComponent extends FretboardBaseComponent {
       default:
         return '';
     }
+  }
+
+  hideNote(note: FretboardNote): boolean {
+    if (!note.inScale) {
+      return true;
+    }
+    return !this.selectedIntervals?.includes(note.interval);
   }
 }

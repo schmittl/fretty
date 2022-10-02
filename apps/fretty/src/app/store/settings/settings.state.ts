@@ -11,7 +11,8 @@ export interface SettingsStateModel {
   showFretNumbers: boolean;
 }
 
-export type NoteLabels = 'notes' | 'intervals' | 'none';
+const noteLabels = ['notes', 'intervals', 'none'] as const;
+export type NoteLabels = typeof noteLabels[number];
 
 const defaultState: SettingsStateModel = {
   version: 1,
@@ -65,7 +66,7 @@ export class SettingsState {
     const state = ctx.getState();
     ctx.setState({
       ...state,
-      noteLabels: action.noteLabels,
+      noteLabels: action.noteLabels ?? this.nextLabelType(ctx.getState().noteLabels),
     });
   }
 
@@ -83,5 +84,13 @@ export class SettingsState {
     ctx.setState({
       ...defaultState,
     });
+  }
+
+  private nextLabelType(current: NoteLabels): NoteLabels {
+    const newIndex = noteLabels.indexOf(current) + 1;
+    if (newIndex === noteLabels.length) {
+      return noteLabels[0];
+    }
+    return noteLabels[newIndex];
   }
 }

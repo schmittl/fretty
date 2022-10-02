@@ -8,7 +8,7 @@ export class UpdateFretboardConfig {
 
 export class UpdateNoteLabels {
   static readonly type = '[Settings] Update note labels';
-  constructor(public noteLabels: NoteLabels) {}
+  constructor(public noteLabels?: NoteLabels) {}
 }
 
 export class ShowFretNumbers {

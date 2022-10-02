@@ -11,6 +11,7 @@ import {
 } from '../../store/settings/settings.actions';
 import { NoteLabels, SettingsState } from '../../store/settings/settings.state';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'fretty-settings',
@@ -19,7 +20,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class SettingsDialogComponent {
   frets = this.store.selectSnapshot(SettingsState.frets);
-  noteLabels = [this.store.selectSnapshot(SettingsState.noteLabels)];
+  noteLabels = this.store.select(SettingsState.noteLabels).pipe(map((label) => [label]));
   showFretNumbers = this.store.select(SettingsState.showFretNumbers);
 
   constructor(

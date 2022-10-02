@@ -4,7 +4,7 @@ import { HotkeyGroup, HotkeysService as NgHotkeysService } from '@ngneat/hotkeys
 import { Store } from '@ngxs/store';
 import { take } from 'rxjs';
 import { HotkeysHelpComponent } from './hotkeys-help.component';
-import { ShowFretNumbers } from '../store/settings/settings.actions';
+import { ShowFretNumbers, UpdateNoteLabels } from '../store/settings/settings.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +23,11 @@ export class HotkeysService {
 
   private registerHotkeys(): void {
     this.hotkeys
-      .addShortcut({ keys: 'f', description: 'Toggle fret numbers', group: 'Fretboard' })
+      .addShortcut({ keys: 'n', description: 'Toggle fret numbers', group: 'Fretboard' })
       .subscribe(() => this.store.dispatch(new ShowFretNumbers()));
+    this.hotkeys
+      .addShortcut({ keys: 'l', description: 'Toggle note labels', group: 'Fretboard' })
+      .subscribe(() => this.store.dispatch(new UpdateNoteLabels()));
   }
 
   private registerHelpModal(): void {

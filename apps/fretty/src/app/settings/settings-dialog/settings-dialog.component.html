@@ -35,7 +35,7 @@
       <label>Note labels</label>
     </div>
     <div class="mt-4">
-      <mat-button-toggle-group multiple [value]="noteLabels" (change)="updateLabels($event)">
+      <mat-button-toggle-group multiple [value]="noteLabels | async" (change)="updateLabels($event)">
         <mat-button-toggle value="notes"><span class="text-sm">Notes</span></mat-button-toggle>
         <mat-button-toggle value="intervals"><span class="text-sm">Intervals</span></mat-button-toggle>
       </mat-button-toggle-group>

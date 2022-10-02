@@ -1,7 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { defaultConfig, Fretboard, FretboardConfig } from '@fretty/music';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { RestoreSettings, ShowFretNumbers, UpdateFretboardConfig, UpdateNoteLabels } from './settings.actions';
+import { take } from 'rxjs';
+import { SettingsDialogComponent } from '../../settings/settings-dialog/settings-dialog.component';
+import {
+  ToggleSettingsDialog,
+  RestoreSettings,
+  ShowFretNumbers,
+  UpdateFretboardConfig,
+  UpdateNoteLabels,
+} from './settings.actions';
 
 // Note: needs to be serializable to restore from localStorage
 export interface SettingsStateModel {
@@ -32,6 +41,10 @@ const defaultState: SettingsStateModel = {
   providedIn: 'root',
 })
 export class SettingsState {
+  private settingsDialogRef: MatDialogRef<SettingsDialogComponent, unknown> | undefined;
+
+  constructor(private readonly dialog: MatDialog, private ngZone: NgZone) {}
+
   @Selector([SettingsState])
   static fretboard(state: SettingsStateModel): Fretboard {
     return new Fretboard(state.fretboardConfig);
@@ -83,6 +96,28 @@ export class SettingsState {
   restoreSettings(ctx: StateContext<SettingsStateModel>): void {
     ctx.setState({
       ...defaultState,
+    });
+  }
+
+  @Action(ToggleSettingsDialog)
+  toggleSettingsDialog(): void {
+    this.ngZone.run(() => {
+      if (this.settingsDialogRef) {
+        this.settingsDialogRef.close();
+        this.settingsDialogRef = undefined;
+      } else {
+        this.settingsDialogRef = this.dialog.open(SettingsDialogComponent, {
+          panelClass: 'fretty-dialog',
+          autoFocus: '#frets-slider',
+          maxWidth: '100vw !important',
+        });
+        this.settingsDialogRef
+          .afterClosed()
+          .pipe(take(1))
+          .subscribe(() => {
+            this.settingsDialogRef = undefined;
+          });
+      }
     });
   }
 

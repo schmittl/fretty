@@ -4,7 +4,7 @@ import { HotkeyGroup, HotkeysService as NgHotkeysService } from '@ngneat/hotkeys
 import { Store } from '@ngxs/store';
 import { take } from 'rxjs';
 import { HotkeysHelpComponent } from './hotkeys-help.component';
-import { ShowFretNumbers, UpdateNoteLabels } from '../store/settings/settings.actions';
+import { ShowFretNumbers, ToggleSettingsDialog, UpdateNoteLabels } from '../store/settings/settings.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +23,10 @@ export class HotkeysService {
 
   private registerHotkeys(): void {
     this.hotkeys
+      .addShortcut({ keys: 'o', description: 'Toggle settings dialog', group: 'Global' })
+      .subscribe(() => this.store.dispatch(new ToggleSettingsDialog()));
+
+    this.hotkeys
       .addShortcut({ keys: 'n', description: 'Toggle fret numbers', group: 'Fretboard' })
       .subscribe(() => this.store.dispatch(new ShowFretNumbers()));
     this.hotkeys
@@ -33,7 +37,7 @@ export class HotkeysService {
   private registerHelpModal(): void {
     this.hotkeys.registerHelpModal(() => {
       if (this.ref) {
-        this.ref?.close();
+        this.ref.close();
         this.ref = undefined;
       } else {
         this.ref = this.dialog.open(HotkeysHelpComponent, {

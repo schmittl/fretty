@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { SettingsService } from '../settings/settings.service';
+import { Store } from '@ngxs/store';
+import { ToggleSettingsDialog } from '../store/settings/settings.actions';
 
 @Component({
   selector: 'fretty-toolbar',
   templateUrl: './toolbar.component.html',
 })
 export class ToolbarComponent {
-  constructor(private readonly settingsService: SettingsService) {}
+  constructor(private readonly store: Store) {}
 
   openSettings(): void {
-    this.settingsService.open();
+    this.store.dispatch(new ToggleSettingsDialog());
   }
 }

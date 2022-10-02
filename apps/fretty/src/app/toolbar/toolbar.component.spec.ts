@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SettingsService } from '../settings/settings.service';
-
+import { NgxsModule } from '@ngxs/store';
 import { ToolbarComponent } from './toolbar.component';
 
 describe('ToolbarComponent', () => {
@@ -12,8 +11,7 @@ describe('ToolbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ToolbarComponent],
-      imports: [MatToolbarModule, MatIconModule],
-      providers: [{ provide: SettingsService, useValue: {} }],
+      imports: [MatToolbarModule, MatIconModule, NgxsModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ToolbarComponent);

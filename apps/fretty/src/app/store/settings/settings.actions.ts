@@ -19,3 +19,7 @@ export class ShowFretNumbers {
 export class RestoreSettings {
   static readonly type = '[Settings] Restore defaults';
 }
+
+export class ToggleSettingsDialog {
+  static readonly type = '[Settings] Toggle settings dialog';
+}

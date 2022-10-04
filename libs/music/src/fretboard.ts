@@ -1,7 +1,7 @@
 import { Note, Scale } from '@tonaljs/tonal';
 import { Note as TonalNote } from '@tonaljs/core';
 import { Scale as TonalScale } from '@tonaljs/scale';
-import { defaultScale, defaultKey, scaleIncludes, scaleInterval } from './scale';
+import { defaultScale, defaultKey, scaleInterval } from './scale';
 
 export interface FretboardConfig {
   readonly tuning: string[];
@@ -23,9 +23,9 @@ export const defaultConfig: FretboardConfig = {
 
 export interface FretboardNote {
   readonly pitchclass: string;
-  readonly interval: string;
+  readonly interval?: string;
   readonly isTonic: boolean;
-  readonly inScale: boolean;
+  readonly scalePitchclass?: string;
 }
 
 export type FretboardNotes = readonly (readonly FretboardNote[])[];
@@ -90,20 +90,22 @@ export class Fretboard {
       pitchclass: tonalNote.pc,
       interval: this.getInterval(tonalNote.pc),
       isTonic: this.isTonic(tonalNote.pc),
-      inScale: this.inScale(tonalNote.pc),
+      scalePitchclass: this.getScalePitchclass(tonalNote.pc),
     };
   }
 
-  private getInterval(note: string): string {
+  private getScalePitchclass(note: string): string | undefined {
+    const interval = this.getInterval(note) ?? '';
+    const index = this._scale.intervals.indexOf(interval);
+    return index === -1 ? undefined : this._scale.notes[index];
+  }
+
+  private getInterval(note: string): string | undefined {
     return scaleInterval(this._scale, note);
   }
 
   private isTonic(note: string): boolean {
     return this._scale.tonic === note;
-  }
-
-  private inScale(note: string): boolean {
-    return scaleIncludes(this._scale, note);
   }
 }
 

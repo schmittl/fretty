@@ -26,7 +26,7 @@ export const scaleIncludes = (scale: TonalScale, note: string): boolean => {
   return enharmonicIncludes(scaleNotes, note);
 };
 
-export const scaleInterval = (scale: TonalScale, note: string): string => {
+export const scaleInterval = (scale: TonalScale, note: string): string | undefined => {
   return scale.intervals[enharmonicIndexOf(scale.notes.map(Note.simplify), note)];
 };
 

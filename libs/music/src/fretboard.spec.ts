@@ -67,13 +67,28 @@ describe('Fretboard', () => {
   });
 
   describe('config', () => {
-    it('Returns default config for empty constructor', () => {
+    it('Returns default config for default constructor', () => {
       const fretboard = new Fretboard();
       expect(fretboard.config).toEqual(defaultConfig);
+    });
+  });
+
+  describe('scales notes', () => {
+    it('Returns scale notes for default scale', () => {
+      const fretboard = new Fretboard({ tuning: ['E'] });
+      expect(scaleNotes(fretboard)).toEqual([['E', undefined, 'F#', 'G', undefined, 'A']]);
+    });
+
+    it('Returns scale notes for altered scale', () => {
+      const fretboard = new Fretboard({ scale: 'altered', tuning: ['E'] });
+      expect(scaleNotes(fretboard)).toEqual([['E', 'F', undefined, 'F##', 'G#', undefined]]);
     });
   });
 });
 
 const notes = (fretboard: Fretboard): string[][] => {
   return fretboard.notes.map((string) => string.map((note) => note.pitchclass));
+};
+const scaleNotes = (fretboard: Fretboard): (string | undefined)[][] => {
+  return fretboard.notes.map((string) => string.map((note) => note.scalePitchclass));
 };

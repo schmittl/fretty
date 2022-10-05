@@ -5,3 +5,7 @@ export class ToggleSettingsDialog {
 export class ToggleHotkeysDialog {
   static readonly type = '[Dialog] Toggle hotkeys';
 }
+
+export class ToggleAboutDialog {
+  static readonly type = '[Dialog] Toggle about';
+}

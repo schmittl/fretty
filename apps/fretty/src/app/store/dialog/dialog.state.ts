@@ -2,9 +2,10 @@ import { Injectable, NgZone } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Action, State } from '@ngxs/store';
 import { take } from 'rxjs';
+import { AboutComponent } from '../../about/about.component';
 import { HotkeysHelpComponent } from '../../hotkeys/hotkeys-help.component';
 import { SettingsDialogComponent } from '../../settings/settings-dialog/settings-dialog.component';
-import { ToggleHotkeysDialog, ToggleSettingsDialog } from './dialog.actions';
+import { ToggleAboutDialog, ToggleHotkeysDialog, ToggleSettingsDialog } from './dialog.actions';
 
 @State<unknown>({
   name: 'dialog',
@@ -16,6 +17,7 @@ import { ToggleHotkeysDialog, ToggleSettingsDialog } from './dialog.actions';
 export class DialogState {
   private settingsRef: MatDialogRef<SettingsDialogComponent> | undefined;
   private hotkeysRef: MatDialogRef<HotkeysHelpComponent> | undefined;
+  private aboutRef: MatDialogRef<AboutComponent> | undefined;
 
   constructor(private readonly dialog: MatDialog, private ngZone: NgZone) {}
 
@@ -62,6 +64,30 @@ export class DialogState {
           .pipe(take(1))
           .subscribe(() => {
             this.hotkeysRef = undefined;
+          });
+      }
+    });
+  }
+
+  @Action(ToggleAboutDialog)
+  toggleAboutDialog(): void {
+    this.ngZone.run(() => {
+      this.dialog.closeAll();
+
+      if (this.aboutRef) {
+        this.aboutRef = undefined;
+      } else {
+        this.aboutRef = this.dialog.open(AboutComponent, {
+          width: '500px',
+          maxWidth: '100vw !important',
+          panelClass: 'fretty-dialog',
+          autoFocus: false,
+        });
+        this.aboutRef
+          .afterClosed()
+          .pipe(take(1))
+          .subscribe(() => {
+            this.aboutRef = undefined;
           });
       }
     });

@@ -1,12 +1,14 @@
-<mat-toolbar color="primary" class="justify-center">
-  <span class="font-sans font-bold text-4xl text-zinc-100 ml-auto">fretty</span>
+<mat-toolbar color="primary" class="justify-between">
+  <div class="flex">
+    <span class="font-sans font-bold text-4xl text-zinc-100 cursor-pointer" (click)="openAbout()">fretty</span>
+  </div>
 
-  <div class="flex ml-auto">
-    <button mat-icon-button class="hidden md:block print:invisible" (click)="openHotkeys()">
+  <div class="flex print:invisible">
+    <button mat-icon-button class="hidden md:block" (click)="openHotkeys()">
       <mat-icon class="scale-150 align-middle">keyboard</mat-icon>
     </button>
 
-    <button mat-icon-button class="md:ml-8 print:invisible" (click)="openSettings()">
+    <button mat-icon-button class="ml-4 md:ml-8" (click)="openSettings()">
       <mat-icon class="scale-150 align-middle">settings</mat-icon>
     </button>
   </div>

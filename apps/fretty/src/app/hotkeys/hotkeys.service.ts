@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Hotkey, HotkeyGroup, HotkeysService as NgHotkeysService } from '@ngneat/hotkeys';
 import { Store } from '@ngxs/store';
 import { filter, MonoTypeOperatorFunction, Observable } from 'rxjs';
-import { HotkeysHelpComponent } from './hotkeys-help.component';
 import { ShowFretNumbers, ToggleIntervals, UpdateNoteLabels } from '../store/settings/settings.actions';
 import { ToggleHotkeysDialog, ToggleSettingsDialog } from '../store/dialog/dialog.actions';
 
@@ -11,31 +9,30 @@ import { ToggleHotkeysDialog, ToggleSettingsDialog } from '../store/dialog/dialo
   providedIn: 'root',
 })
 export class HotkeysService {
-  private ref: MatDialogRef<HotkeysHelpComponent> | undefined;
-  private disallowedElements = 'MAT-SELECT';
+  private disallowedElements = ['MAT-SELECT'];
 
-  constructor(private store: Store, private hotkeys: NgHotkeysService, private dialog: MatDialog) {
+  constructor(private store: Store, private hotkeys: NgHotkeysService) {
     this.registerHelpModal();
     this.registerHotkeys();
   }
 
-  getShortcuts(): HotkeyGroup[] {
-    const shortcuts = this.hotkeys.getShortcuts();
-    const globalShortcuts = shortcuts.find((shortcut) => shortcut.group === 'Global');
-    globalShortcuts?.hotkeys.push({
+  getHotkeys(): HotkeyGroup[] {
+    const hotkeys = this.hotkeys.getShortcuts();
+    const globalHotkeys = hotkeys.find((hotkey) => hotkey.group === 'Global');
+    globalHotkeys?.hotkeys.push({
       description: 'Toggle hotkey dialog',
       keys: '?',
     });
-    const fretboardShortcuts = shortcuts.find((shortcut) => shortcut.group === 'Fretboard');
-    fretboardShortcuts?.hotkeys.push({
+    const fretboardHotkeys = hotkeys.find((hotkey) => hotkey.group === 'Fretboard');
+    fretboardHotkeys?.hotkeys.push({
       description: 'Toggle notes based on interval',
       keys: '1-7',
     });
-    fretboardShortcuts?.hotkeys.push({
+    fretboardHotkeys?.hotkeys.push({
       description: 'Restore all notes',
       keys: '0',
     });
-    return shortcuts;
+    return hotkeys;
   }
 
   private registerHotkeys(): void {

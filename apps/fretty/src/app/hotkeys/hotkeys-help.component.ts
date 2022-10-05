@@ -6,7 +6,7 @@ import { HotkeysService } from './hotkeys.service';
   templateUrl: './hotkeys-help.component.html',
 })
 export class HotkeysHelpComponent {
-  hotkeys = this.hotkeysService.getShortcuts();
+  hotkeys = this.hotkeysService.getHotkeys();
 
   constructor(private hotkeysService: HotkeysService) {}
 }

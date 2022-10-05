@@ -21,6 +21,11 @@ export class HotkeysService {
 
   getShortcuts(): HotkeyGroup[] {
     const shortcuts = this.hotkeys.getShortcuts();
+    const globalShortcuts = shortcuts.find((shortcut) => shortcut.group === 'Global');
+    globalShortcuts?.hotkeys.push({
+      description: 'Toggle hotkey dialog',
+      keys: '?',
+    });
     const fretboardShortcuts = shortcuts.find((shortcut) => shortcut.group === 'Fretboard');
     fretboardShortcuts?.hotkeys.push({
       description: 'Toggle notes based on interval',

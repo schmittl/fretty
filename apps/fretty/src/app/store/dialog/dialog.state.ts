@@ -23,10 +23,9 @@ export class DialogState {
   toggleSettingsDialog(): void {
     // ngxs runs all actions outside the angular zone. We need to be in zone to close dialog via button
     this.ngZone.run(() => {
-      this.close(this.hotkeysRef);
+      this.dialog.closeAll();
 
       if (this.settingsRef) {
-        this.settingsRef.close();
         this.settingsRef = undefined;
       } else {
         this.settingsRef = this.dialog.open(SettingsDialogComponent, {
@@ -47,10 +46,9 @@ export class DialogState {
   @Action(ToggleHotkeysDialog)
   toggleHotkeysDialog(): void {
     this.ngZone.run(() => {
-      this.close(this.settingsRef);
+      this.dialog.closeAll();
 
       if (this.hotkeysRef) {
-        this.hotkeysRef.close();
         this.hotkeysRef = undefined;
       } else {
         this.hotkeysRef = this.dialog.open(HotkeysHelpComponent, {
@@ -67,11 +65,5 @@ export class DialogState {
           });
       }
     });
-  }
-
-  private close(ref: MatDialogRef<unknown> | undefined): void {
-    if (ref) {
-      ref.close();
-    }
   }
 }

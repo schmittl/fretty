@@ -1,7 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Action, State } from '@ngxs/store';
-import { take } from 'rxjs';
 import { AboutComponent } from '../../about/about.component';
 import { HotkeysHelpComponent } from '../../hotkeys/hotkeys-help.component';
 import { SettingsDialogComponent } from '../../settings/settings-dialog/settings-dialog.component';
@@ -15,81 +14,63 @@ import { ToggleAboutDialog, ToggleHotkeysDialog, ToggleSettingsDialog } from './
   providedIn: 'root',
 })
 export class DialogState {
-  private settingsRef: MatDialogRef<SettingsDialogComponent> | undefined;
-  private hotkeysRef: MatDialogRef<HotkeysHelpComponent> | undefined;
-  private aboutRef: MatDialogRef<AboutComponent> | undefined;
-
   constructor(private readonly dialog: MatDialog, private ngZone: NgZone) {}
 
   @Action(ToggleSettingsDialog)
   toggleSettingsDialog(): void {
-    // ngxs runs all actions outside the angular zone. We need to be in zone to close dialog via button
-    this.ngZone.run(() => {
+    this.runInZone(() => {
+      const settingsRef = this.dialog.getDialogById('settings');
       this.dialog.closeAll();
 
-      if (this.settingsRef) {
-        this.settingsRef = undefined;
-      } else {
-        this.settingsRef = this.dialog.open(SettingsDialogComponent, {
+      if (settingsRef == null) {
+        this.dialog.open(SettingsDialogComponent, {
+          id: 'settings',
           panelClass: 'fretty-dialog',
           autoFocus: '#frets-slider',
           maxWidth: '100vw !important',
         });
-        this.settingsRef
-          .afterClosed()
-          .pipe(take(1))
-          .subscribe(() => {
-            this.settingsRef = undefined;
-          });
       }
     });
   }
 
   @Action(ToggleHotkeysDialog)
   toggleHotkeysDialog(): void {
-    this.ngZone.run(() => {
+    this.runInZone(() => {
+      const hotkeysRef = this.dialog.getDialogById('hotkeys');
       this.dialog.closeAll();
 
-      if (this.hotkeysRef) {
-        this.hotkeysRef = undefined;
-      } else {
-        this.hotkeysRef = this.dialog.open(HotkeysHelpComponent, {
+      if (hotkeysRef == null) {
+        this.dialog.open(HotkeysHelpComponent, {
+          id: 'hotkeys',
           width: '500px',
           maxWidth: '100vw !important',
           panelClass: 'fretty-dialog',
           autoFocus: false,
         });
-        this.hotkeysRef
-          .afterClosed()
-          .pipe(take(1))
-          .subscribe(() => {
-            this.hotkeysRef = undefined;
-          });
       }
     });
   }
 
   @Action(ToggleAboutDialog)
   toggleAboutDialog(): void {
-    this.ngZone.run(() => {
+    this.runInZone(() => {
+      const hotkeysRef = this.dialog.getDialogById('about');
       this.dialog.closeAll();
 
-      if (this.aboutRef) {
-        this.aboutRef = undefined;
-      } else {
-        this.aboutRef = this.dialog.open(AboutComponent, {
+      if (hotkeysRef == null) {
+        this.dialog.open(AboutComponent, {
+          id: 'about',
           width: '500px',
           maxWidth: '100vw !important',
           panelClass: 'fretty-dialog',
           autoFocus: false,
         });
-        this.aboutRef
-          .afterClosed()
-          .pipe(take(1))
-          .subscribe(() => {
-            this.aboutRef = undefined;
-          });
       }
     });
+  }
+
+  // ngxs runs all actions outside the angular zone. We need to be in zone e.g. to close dialog via button
+  private runInZone(fn: () => void): void {
+    this.ngZone.run(() => fn());
   }
 }

@@ -50,8 +50,16 @@ export class Fretboard {
     return this._notes;
   }
 
-  get intervals(): string[] {
+  get scaleIntervals(): string[] {
     return this._scale.intervals;
+  }
+
+  get scaleNotes(): string[] {
+    return this._scale.notes;
+  }
+
+  get scaleName(): string {
+    return this._config.key + ' ' + this._config.scale;
   }
 
   private notesOnFretboard(): FretboardNote[][] {

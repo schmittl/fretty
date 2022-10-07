@@ -64,7 +64,7 @@ export class SettingsState {
   @Selector([SettingsState, SettingsState.fretboard])
   static selectedIntervals(state: SettingsStateModel, fretboard: Fretboard): string[] {
     if (state.selectedIntervals == null) {
-      return fretboard.intervals;
+      return fretboard.scaleIntervals;
     }
     return state.selectedIntervals;
   }
@@ -112,16 +112,16 @@ export class SettingsState {
     if (key === '0') {
       ctx.setState({
         ...state,
-        selectedIntervals: [...fretboard.intervals],
+        selectedIntervals: [...fretboard.scaleIntervals],
       });
     } else {
-      if (fretboard.intervals.length === state.selectedIntervals?.length) {
+      if (fretboard.scaleIntervals.length === state.selectedIntervals?.length) {
         ctx.setState({
           ...state,
-          selectedIntervals: fretboard.intervals.filter((interval) => interval.includes(key)),
+          selectedIntervals: fretboard.scaleIntervals.filter((interval) => interval.includes(key)),
         });
       } else {
-        const typedIntervals = fretboard.intervals.filter((interval) => interval.includes(key));
+        const typedIntervals = fretboard.scaleIntervals.filter((interval) => interval.includes(key));
         if (typedIntervals.length > 0 && !typedIntervals.every((e) => state.selectedIntervals?.includes(e))) {
           ctx.setState({
             ...state,

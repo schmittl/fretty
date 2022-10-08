@@ -112,20 +112,23 @@ export class SettingsState {
     if (key === '0') {
       ctx.setState({
         ...state,
-        selectedIntervals: [...fretboard.scaleIntervals],
+        selectedIntervals: undefined,
       });
     } else {
-      if (fretboard.scaleIntervals.length === state.selectedIntervals?.length) {
-        ctx.setState({
-          ...state,
-          selectedIntervals: fretboard.scaleIntervals.filter((interval) => interval.includes(key)),
-        });
-      } else {
-        const typedIntervals = fretboard.scaleIntervals.filter((interval) => interval.includes(key));
-        if (typedIntervals.length > 0 && !typedIntervals.every((e) => state.selectedIntervals?.includes(e))) {
+      const selectedIntervals = new Set(state.selectedIntervals);
+      const typedIntervals = fretboard.scaleIntervals.filter((interval) => interval.includes(key));
+      const containsTypedIntervals = typedIntervals.every((e) => selectedIntervals.has(e));
+
+      if (typedIntervals.length > 0) {
+        if (containsTypedIntervals) {
           ctx.setState({
             ...state,
-            selectedIntervals: [...(state.selectedIntervals ?? []), ...typedIntervals],
+            selectedIntervals: undefined,
+          });
+        } else {
+          ctx.setState({
+            ...state,
+            selectedIntervals: [...selectedIntervals, ...typedIntervals],
           });
         }
       }

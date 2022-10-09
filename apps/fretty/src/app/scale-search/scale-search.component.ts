@@ -58,9 +58,9 @@ export class ScaleSearchComponent {
     this.dialog.close();
   }
 
-  toggleShowFavorites(): void {
+  toggleShowFavorites(event: MouseEvent): void {
+    event.stopPropagation();
     this.store.dispatch(new ToggleShowFavorites());
-
     this.onSearch(this.selectedScale);
   }
 

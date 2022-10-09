@@ -8,7 +8,7 @@
   <mat-label>Search scales</mat-label>
   <input id="scale-search" matInput [(ngModel)]="selectedScale" (ngModelChange)="onSearch($event)" />
 
-  <button matSuffix mat-icon-button (click)="toggleShowFavorites()">
+  <button matSuffix mat-icon-button (click)="toggleShowFavorites($event)">
     <mat-icon>{{ (showFavorites$ | async) ? 'favorite' : 'favorite_border' }}</mat-icon>
   </button>
   <mat-hint>{{ scales.length }} scales found</mat-hint>

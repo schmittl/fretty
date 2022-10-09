@@ -22,10 +22,10 @@ export class ScaleSearchComponent {
     const subcription = this.breakpointObserver.observe([Breakpoints.Handset]).subscribe((size) => {
       if (size.matches) {
         dialog.updateSize('100vw', '100vh');
-        dialog.updatePosition({ top: '0px' });
+        dialog.updatePosition({});
       } else {
         dialog.updateSize('500px', '');
-        dialog.updatePosition({ top: '10vw' });
+        dialog.updatePosition({ top: '10vh' });
       }
     });
     dialog.afterClosed().subscribe(() => {

@@ -6,10 +6,10 @@
 
 <mat-form-field appearance="outline" color="accent" class="w-full">
   <mat-label>Search scales</mat-label>
-  <input id="scale-search" matInput [ngModel]="selectedScale" (ngModelChange)="onSearch($event)" />
+  <input id="scale-search" matInput [(ngModel)]="selectedScale" (ngModelChange)="onSearch($event)" />
 
-  <button matSuffix mat-icon-button disabled>
-    <mat-icon>filter_alt</mat-icon>
+  <button matSuffix mat-icon-button (click)="toggleShowFavorites()">
+    <mat-icon>{{ (showFavorites$ | async) ? 'favorite' : 'favorite_border' }}</mat-icon>
   </button>
   <mat-hint>{{ scales.length }} scales found</mat-hint>
 </mat-form-field>
@@ -29,8 +29,8 @@
       <div class="text-xs leading-6">
         <div>{{ scale.intervals | intervals }}</div>
       </div>
-      <div class="ml-2">
-        <mat-icon>chevron_right</mat-icon>
+      <div class="ml-2" (click)="toggleFavorite($event, scale.name)">
+        <mat-icon>{{ (isFavorite$(scale.name) | async) ? 'favorite' : 'favorite_border' }}</mat-icon>
       </div>
     </div>
   </mat-card>

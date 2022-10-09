@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+
 @import '@angular/material/theming';
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -42,7 +43,10 @@ $background: map-get($palette-color, background);
 $background: map_merge(
   $background,
   (
+    // https://github.com/angular/components/blob/main/src/material/core/theming/_palette.scss
     background: $fretty-background-color,
+    card: $fretty-background-color,
+    dialog: $fretty-background-color
   )
 );
 $palette-color: map_merge(
@@ -67,6 +71,7 @@ $fretty-theme: map_merge(
 @include mat.slide-toggle-theme($fretty-theme);
 @include mat.button-theme($fretty-theme);
 @include mat.button-toggle-theme($fretty-theme);
+@include mat.card-color($fretty-theme);
 
 @mixin mix-fretty-theme($fretty-theme) {
   $primary: map-get($fretty-theme, primary);
@@ -84,12 +89,6 @@ $fretty-theme: map_merge(
 }
 
 @include mix-fretty-theme($fretty-theme);
-
-@layer components {
-  .fretty-dialog > mat-dialog-container {
-    @apply bg-zinc-700;
-  }
-}
 
 .mat-expansion-panel-header {
   padding: 0 2px 0 0 !important;

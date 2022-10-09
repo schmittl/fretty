@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Fretboard } from '@fretty/music';
 import { Store } from '@ngxs/store';
+import { ToggleScaleSearchDialog } from '../../store/dialog/dialog.actions';
 import { UpdateFretboardConfig } from '../../store/settings/settings.actions';
 import { SettingsState } from '../../store/settings/settings.state';
 import { FretboardBaseComponent } from '../fretboard-base.component';
@@ -24,6 +25,10 @@ export class FretboardContainerComponent extends FretboardBaseComponent {
 
   settingsChanged(settings: FretboardSettings): void {
     this.store.dispatch(new UpdateFretboardConfig(settings));
+  }
+
+  openScaleSearch(): void {
+    this.store.dispatch(new ToggleScaleSearchDialog());
   }
 
   viewBox(fretboard: Fretboard): string {

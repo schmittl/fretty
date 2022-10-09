@@ -6,13 +6,13 @@
     selectedIntervals: selectedIntervals$ | async
   } as vm"
 >
-  <fretty-fretboard-settings
-    [selectedScale]="vm.fretboard!.config.scale"
-    [selectedKey]="vm.fretboard!.config.key"
-    (settingsChanged)="settingsChanged($event)"
-  ></fretty-fretboard-settings>
-
-  <div class="flex flex-col justify-center items-center md:fretboard-container">
+  <div class="flex flex-col justify-center items-center md:h-full">
+    <fretty-fretboard-settings
+      [selectedScale]="vm.fretboard!.config.scale"
+      [selectedKey]="vm.fretboard!.config.key"
+      (settingsChanged)="settingsChanged($event)"
+      (searchClicked)="openScaleSearch()"
+    ></fretty-fretboard-settings>
     <fretty-fretboard-scale [fretboard]="vm.fretboard!"></fretty-fretboard-scale>
     <svg
       [attr.viewBox]="viewBox(vm.fretboard!)"

@@ -1,0 +1,35 @@
+<div class="md:hidden">
+  <button mat-icon-button class="close-button float-right text-zinc-100" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+</div>
+
+<mat-form-field appearance="outline" color="accent" class="w-full">
+  <mat-label>Scale</mat-label>
+  <input id="scale-search" matInput [ngModel]="selectedScale" (ngModelChange)="onSearch($event)" />
+  <button matSuffix mat-icon-button disabled>
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>
+<mat-dialog-content tabindex="-1">
+  <mat-card
+    tabindex="0"
+    *ngFor="let scale of scales"
+    class="mt-2 outline-neutral-500 outline outline-1 hover:outline-neutral-200 hover:outline-2 focus-visible:outline-[#64FFDA] focus-visible:outline focus-visible:outline-2"
+    (keydown.enter)="selectScale(scale.name)"
+  >
+    <div class="flex">
+      <div class="flex-1">
+        <div class="font-semibold">{{ scale.name }}</div>
+        <div class="text-xs text-neutral-300" *ngFor="let alias of scale.aliases">{{ alias }}</div>
+      </div>
+      <div class="text-xs leading-6">
+        <div>{{ scale.intervals.join(' ') }}</div>
+      </div>
+      <div class="ml-2 cursor-pointer" (click)="selectScale(scale.name)">
+        <mat-icon>chevron_right</mat-icon>
+      </div>
+    </div>
+  </mat-card>
+  <div class="mt-2"></div>
+</mat-dialog-content>

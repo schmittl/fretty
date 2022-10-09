@@ -1,7 +1,0 @@
-@import 'tailwindcss/utilities';
-
-@layer utilities {
-  fretty-fretboard-container .fretboard-container {
-    height: calc(100% - 78px); // subtract settings height
-  }
-}

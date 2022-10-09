@@ -2,16 +2,10 @@
   <div>
     <mat-form-field appearance="outline" color="accent">
       <mat-label>Scale</mat-label>
-      <mat-select
-        [ngModel]="selectedScale"
-        (ngModelChange)="onScaleChanged($event)"
-        panelClass="bg-zinc-200 dark:bg-zinc-700 max-w-fit"
-        [disableOptionCentering]="true"
-      >
-        <mat-option *ngFor="let scale of scales" [value]="scale">
-          {{ scale }}
-        </mat-option>
-      </mat-select>
+      <input matInput disabled [ngModel]="selectedScale" />
+      <button matSuffix mat-icon-button (click)="onSearchClicked()">
+        <mat-icon>search</mat-icon>
+      </button>
     </mat-form-field>
   </div>
   <div class="ml-2">

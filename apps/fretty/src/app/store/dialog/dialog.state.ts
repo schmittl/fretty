@@ -3,8 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { Action, State } from '@ngxs/store';
 import { AboutComponent } from '../../about/about.component';
 import { HotkeysHelpComponent } from '../../hotkeys/hotkeys-help.component';
+import { ScaleSearchComponent } from '../../scale-search/scale-search.component';
 import { SettingsDialogComponent } from '../../settings/settings-dialog/settings-dialog.component';
-import { ToggleAboutDialog, ToggleHotkeysDialog, ToggleSettingsDialog } from './dialog.actions';
+import {
+  ToggleAboutDialog,
+  ToggleHotkeysDialog,
+  ToggleScaleSearchDialog,
+  ToggleSettingsDialog,
+} from './dialog.actions';
 
 @State<unknown>({
   name: 'dialog',
@@ -25,7 +31,6 @@ export class DialogState {
       if (settingsRef == null) {
         this.dialog.open(SettingsDialogComponent, {
           id: 'settings',
-          panelClass: 'fretty-dialog',
           autoFocus: '#frets-slider',
           maxWidth: '100vw !important',
         });
@@ -44,7 +49,6 @@ export class DialogState {
           id: 'hotkeys',
           width: '500px',
           maxWidth: '100vw !important',
-          panelClass: 'fretty-dialog',
           autoFocus: false,
         });
       }
@@ -62,8 +66,22 @@ export class DialogState {
           id: 'about',
           width: '500px',
           maxWidth: '100vw !important',
-          panelClass: 'fretty-dialog',
           autoFocus: false,
+        });
+      }
+    });
+  }
+
+  @Action(ToggleScaleSearchDialog)
+  toggleScaleFinder(): void {
+    this.runInZone(() => {
+      const hotkeysRef = this.dialog.getDialogById('scale-search');
+      this.dialog.closeAll();
+
+      if (hotkeysRef == null) {
+        this.dialog.open(ScaleSearchComponent, {
+          id: 'scale-search',
+          maxWidth: '100vw !important',
         });
       }
     });

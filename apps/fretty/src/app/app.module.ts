@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { StoreModule } from './store/store.module';
 import { HotkeysModule } from './hotkeys/hotkeys.module';
 import { AboutModule } from './about/about.module';
+import { ScaleSearchModule } from './scale-search/scale-search.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { AboutModule } from './about/about.module';
     SettingsModule,
     StoreModule,
     ToolbarModule,
+    ScaleSearchModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

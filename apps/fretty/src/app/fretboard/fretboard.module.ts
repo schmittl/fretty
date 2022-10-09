@@ -8,7 +8,10 @@ import { FretboardNotesComponent } from './fretboard-notes/fretboard-notes.compo
 import { FretboardSettingsComponent } from './fretboard-settings/fretboard-settings.component';
 import { MatSelectModule } from '@angular/material/select';
 import { FretboardScaleComponent } from './fretboard-scale/fretboard-scale.component';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     FretboardBackgroundComponent,
@@ -18,7 +21,15 @@ import { FretboardScaleComponent } from './fretboard-scale/fretboard-scale.compo
     FretboardScaleComponent,
     FretboardSettingsComponent,
   ],
-  imports: [CommonModule, FormsModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
   exports: [FretboardContainerComponent],
 })
 export class FretboardModule {}

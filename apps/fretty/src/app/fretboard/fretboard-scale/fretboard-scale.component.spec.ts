@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Fretboard } from '@fretty/music';
+import { SharedModule } from '../../shared/shared.module';
 
 import { FretboardScaleComponent } from './fretboard-scale.component';
 
@@ -10,6 +11,7 @@ describe('FretboardScaleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FretboardScaleComponent],
+      imports: [SharedModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FretboardScaleComponent);

@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [ScaleSearchComponent],
@@ -20,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatDialogModule,
     MatCardModule,
+    SharedModule,
   ],
 })
 export class ScaleSearchModule {}

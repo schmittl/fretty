@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { EMPTY, of } from 'rxjs';
+import { SharedModule } from '../shared/shared.module';
 
 import { ScaleSearchComponent } from './scale-search.component';
 
@@ -29,6 +30,7 @@ describe('ScaleSearchComponent', () => {
         MatCardModule,
         NgxsModule.forRoot(),
         NoopAnimationsModule,
+        SharedModule,
       ],
       providers: [{ provide: MatDialogRef, useValue: { afterClosed: () => of(EMPTY) } }],
     }).compileComponents();

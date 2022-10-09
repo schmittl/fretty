@@ -97,3 +97,13 @@ $fretty-theme: map_merge(
 .mat-expansion-panel-content > .mat-expansion-panel-body {
   padding: 0 !important;
 }
+
+$primary-color: mat.get-color-from-palette($fretty-primary, 500);
+$accent-color: mat.get-color-from-palette($fretty-accent, A200);
+
+@layer base {
+  :root {
+    --mat-primary-color: #{$primary-color};
+    --mat-accent-color: #{$accent-color};
+  }
+}

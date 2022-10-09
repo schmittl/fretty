@@ -1,14 +1,11 @@
-<div class="text-lg md:text-2xl text-neutral-200 flex flex-col items-center">
-  <div>
-    {{ fretboard.scaleName }}
-  </div>
-  <table class="font-mono mt-2 md:mt-4">
+<div class="text-base md:text-lg font-mono text-neutral-200 flex flex-col items-center">
+  <table class="font-mono">
     <tbody>
-      <tr class="text-base md:text-lg">
+      <tr>
         <td *ngFor="let note of fretboard.scaleNotes" class="px-2 text-center">{{ note }}</td>
       </tr>
-      <tr class="text-base md:text-lg">
-        <td *ngFor="let interval of fretboard.scaleIntervals" class="px-2 text-center">{{ interval }}</td>
+      <tr>
+        <td *ngFor="let interval of fretboard.scaleIntervals" class="px-2 text-center">{{ interval | intervals }}</td>
       </tr>
     </tbody>
   </table>

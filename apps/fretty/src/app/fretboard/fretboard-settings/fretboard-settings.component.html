@@ -3,7 +3,7 @@
     <mat-form-field appearance="outline" color="accent">
       <mat-label>Scale</mat-label>
       <input matInput disabled [ngModel]="selectedScale" />
-      <button matSuffix mat-icon-button (click)="onSearchClicked()">
+      <button matSuffix mat-icon-button (click)="onSearchClicked()" class="print:invisible">
         <mat-icon>search</mat-icon>
       </button>
     </mat-form-field>

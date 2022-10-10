@@ -17,7 +17,7 @@
   <mat-card
     tabindex="0"
     *ngFor="let scale of scales"
-    class="mt-2 cursor-pointer outline-neutral-500 outline outline-1 hover:outline-neutral-200 hover:outline-2 focus-visible:outline-[#64FFDA] focus-visible:outline focus-visible:outline-2"
+    class="mt-2 cursor-pointer outline-neutral-500 outline outline-1 hover:outline-neutral-200 hover:outline-2 focus-visible:outline-accent focus-visible:outline focus-visible:outline-2"
     (keydown.enter)="selectScale(scale.name)"
     (click)="selectScale(scale.name)"
   >

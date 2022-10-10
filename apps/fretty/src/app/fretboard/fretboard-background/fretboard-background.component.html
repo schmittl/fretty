@@ -16,10 +16,10 @@
     [attr.transform]="transformX(column)"
   >
     <svg:text
-      *ngIf="!firstColumn && lastRow && showFretNumbers"
+      *ngIf="lastRow && showFretNumbers"
       attr.x="{{ noteSpacing - notePadding }}"
       attr.y="{{ noteSize * 2 }}"
-      class="text-4xl font-semibold font-mono fill-stone-800 select-none"
+      class="text-3xl font-semibold font-mono fill-neutral-300 select-none"
       text-anchor="middle"
       dominant-baseline="central"
     >

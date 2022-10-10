@@ -1,11 +1,11 @@
-<div class="text-base md:text-lg font-mono text-neutral-200 flex flex-col items-center">
-  <table class="font-mono">
+<div class="text-lg md:text-xl font-mono text-neutral-300 flex flex-col items-center">
+  <table class="text-center">
     <tbody>
       <tr>
-        <td *ngFor="let note of fretboard.scaleNotes" class="px-2 text-center">{{ note }}</td>
+        <td *ngFor="let note of fretboard.scaleNotes" class="px-2">{{ note }}</td>
       </tr>
       <tr>
-        <td *ngFor="let interval of fretboard.scaleIntervals" class="px-2 text-center">{{ interval | intervals }}</td>
+        <td *ngFor="let interval of fretboard.scaleIntervals" class="px-2">{{ interval | intervals }}</td>
       </tr>
     </tbody>
   </table>

@@ -1,26 +1,32 @@
-<button mat-icon-button class="close-button float-right text-zinc-100" [mat-dialog-close]="true">
-  <mat-icon class="close-icon" color="warn">close</mat-icon>
+<button mat-icon-button class="float-right text-zinc-100" [mat-dialog-close]="true">
+  <mat-icon>close</mat-icon>
 </button>
 <div mat-dialog-title class="font-sans font-bold text-3xl text-zinc-100 text-center">About</div>
 
 <mat-dialog-content class="font-sans text-base">
-  <div>
-    Have feedback? Send a mail to <a class="text-accent" href="mailto:feedback@fretty.de">feedback@fretty.de</a>
+  <div class="flex">
+    <mat-icon class="shrink-0">question_answer</mat-icon>
+    <span class="ml-2">
+      Have feedback? Send a mail to <a class="text-accent" href="mailto:feedback@fretty.de">feedback@fretty.de</a>
+    </span>
   </div>
   <div class="mt-4">
-    This page is hosted with <a class="text-accent" href="https://pages.github.com/">github pages</a>
+    <div class="flex">
+      <mat-icon class="shrink-0">info</mat-icon>
+      <span class="ml-2">
+        fretty is open source. Show <a class="text-accent" href="3rdpartylicenses.txt">third party licenses</a>
+        <br />
+        Check source code on
+        <a class="text-accent" href="https://github.com/schmittl/fretty">GitHub</a>
+      </span>
+    </div>
   </div>
   <div class="mt-4">
-    fretty is open source. Check source code on
-    <a class="text-accent" href="https://github.com/schmittl/fretty">github</a>
-  </div>
-  <div class="mt-4">
-    fretty uses open source software and components:
-    <mat-expansion-panel class="mt-2">
-      <mat-expansion-panel-header class="font-sans text-base">
-        <mat-panel-title><span class="text-sm">Show third party licenses</span></mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="mt-4 text-sm whitespace-pre-wrap">{{ licenses | async }}</div>
-    </mat-expansion-panel>
+    <div class="flex">
+      <mat-icon class="shrink-0">cloud</mat-icon>
+      <span class="ml-2"
+        >This page is hosted on <a class="text-accent" href="https://pages.github.com/">GitHub Pages</a></span
+      >
+    </div>
   </div>
 </mat-dialog-content>
